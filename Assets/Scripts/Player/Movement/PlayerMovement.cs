@@ -53,6 +53,8 @@ public class PlayerMovement : PlayerModule
         cameraTransform = cam.transform;
         directionTransform = cam.DirectionXZTransform;
 
+        input.OnMove += HandleMovement;
+
         input.OnRun += Run;
         input.OnCrouch += Crouch;
 
@@ -79,7 +81,7 @@ public class PlayerMovement : PlayerModule
 
     private void FixedUpdate()
     {
-        HandleMovement();
+        //HandleMovement();
         CalculateGrounded();
     }
 
@@ -124,9 +126,9 @@ public class PlayerMovement : PlayerModule
         }
     }
 
-    private void HandleMovement()
+    private void HandleMovement(Vector2 moveInput)
     {
-        Vector2 moveInput = input.Move;
+        //Vector2 moveInput = input.Move;
 
         if (moveInput == Vector2.zero)
             return;

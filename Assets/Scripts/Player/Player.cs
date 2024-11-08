@@ -5,6 +5,10 @@ public class Player : MonoBehaviour
     [Header("Modules")]
     [SerializeField] private PlayerCamera cam;
     [SerializeField] private PlayerMovement movement;
+    [SerializeField] private HealthSystem healthSystem;
+
+    [Header("Stats")]
+    [SerializeField] private float maxHealth = 100f;
 
     private PlayerInput input;
 
@@ -21,6 +25,8 @@ public class Player : MonoBehaviour
 
         cam.Init(input);
         movement.Init(input, cam);
+
+        healthSystem.Init(maxHealth);
     }
 
     private void Update()

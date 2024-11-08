@@ -17,10 +17,17 @@ public class PlayerCamera : PlayerModule
 
     public Transform DirectionXZTransform => orientationTransform;
 
+    public override void Init(PlayerInput input)
+    {
+        base.Init(input);
+
+        input.OnRotate += Rotate;
+    }
+
     private void Update()
     {
         Move();
-        Rotate();
+        //Rotate();
     }
     
     private void Move()
@@ -28,9 +35,9 @@ public class PlayerCamera : PlayerModule
         transform.position = followTransform.position;
     }
 
-    private void Rotate()
+    private void Rotate(Vector2 inputLook)
     {
-        Vector2 inputLook = input.Look;
+        //Vector2 inputLook = input.Look;
 
         if (inputLook == Vector2.zero)
             return;

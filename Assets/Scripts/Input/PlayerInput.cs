@@ -1,10 +1,14 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInput
 {
     public event Action<int> OnScroll;
+
+    public event Action<Vector2> OnMove;
+    public event Action<Vector2> OnRotate;
 
     public event Action<bool> OnRun;
     public event Action<bool> OnCrouch;
@@ -13,8 +17,8 @@ public class PlayerInput
 
     private readonly DefaultInputActions inputActions;
 
-    public Vector2 Move => inputActions.Player.Move.ReadValue<Vector2>();
-    public Vector2 Look => inputActions.Player.Look.ReadValue<Vector2>();
+    //public Vector2 Move => inputActions.Player.Move.ReadValue<Vector2>();
+    //public Vector2 Look => inputActions.Player.Look.ReadValue<Vector2>();
 
     public bool IsEnabled { get; private set; }
 
@@ -46,7 +50,13 @@ public class PlayerInput
 
     public void Update()
     {
+        Vector2 moveVector = inputActions.Player.Move.ReadValue<Vector2>();
+        if (moveVector != Vector2.zero)
+            OnMove?.Invoke(moveVector);
 
+        Vector2 rotationVector = inputActions.Player.Look.ReadValue<Vector2>();
+        if (rotationVector != Vector2.zero)
+            OnRotate?.Invoke(rotationVector);
     }
 
     private void OnRunPerformed(InputAction.CallbackContext context)
