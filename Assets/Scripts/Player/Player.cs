@@ -10,7 +10,18 @@ public class Player : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private float maxHealth = 100f;
 
+    private int collectedStarCount;
+    
     private PlayerInput input;
+
+    public static Player Instance { get; private set; }
+    public static Transform Origin => Instance.movement.transform;
+    public static HealthSystem Health => Instance.healthSystem;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -32,5 +43,31 @@ public class Player : MonoBehaviour
     private void Update()
     {
         input.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        input.FixedUpdate();
+    }
+
+    public void AddStar()
+    {
+        collectedStarCount++;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out ICollectable collectable))
+        {
+            collectable.Collect();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.TryGetComponent(out ICollectable collectable))
+        {
+            collectable.Collect();
+        }
     }
 }

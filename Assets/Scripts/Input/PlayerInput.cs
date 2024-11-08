@@ -50,13 +50,16 @@ public class PlayerInput
 
     public void Update()
     {
-        Vector2 moveVector = inputActions.Player.Move.ReadValue<Vector2>();
-        if (moveVector != Vector2.zero)
-            OnMove?.Invoke(moveVector);
-
         Vector2 rotationVector = inputActions.Player.Look.ReadValue<Vector2>();
         if (rotationVector != Vector2.zero)
             OnRotate?.Invoke(rotationVector);
+    }
+
+    public void FixedUpdate()
+    {
+        Vector2 moveVector = inputActions.Player.Move.ReadValue<Vector2>();
+        if (moveVector != Vector2.zero)
+            OnMove?.Invoke(moveVector);
     }
 
     private void OnRunPerformed(InputAction.CallbackContext context)

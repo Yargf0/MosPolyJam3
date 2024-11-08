@@ -130,8 +130,8 @@ public class PlayerMovement : PlayerModule
     {
         //Vector2 moveInput = input.Move;
 
-        if (moveInput == Vector2.zero)
-            return;
+        //if (moveInput == Vector2.zero)
+        //    return;
 
         Vector3 force =
             moveInput.y * currentSpeed * directionTransform.forward +
