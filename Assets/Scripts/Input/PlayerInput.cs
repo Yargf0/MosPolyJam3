@@ -53,6 +53,10 @@ public class PlayerInput
         Vector2 rotationVector = inputActions.Player.Look.ReadValue<Vector2>();
         if (rotationVector != Vector2.zero)
             OnRotate?.Invoke(rotationVector);
+
+        int scrollDelta = (int) inputActions.Player.ScrollDelta.ReadValue<float>();
+        if (scrollDelta != 0)
+            OnScroll?.Invoke(scrollDelta);
     }
 
     public void FixedUpdate()

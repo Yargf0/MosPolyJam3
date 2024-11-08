@@ -15,8 +15,10 @@ public class Player : MonoBehaviour
     private PlayerInput input;
 
     public static Player Instance { get; private set; }
-    public static Transform Origin => Instance.movement.transform;
+    public static Transform OriginTransform => Instance.movement.transform;
     public static HealthSystem Health => Instance.healthSystem;
+    public static Vector3 CameraPosition => Instance.cam.transform.position;
+    public static Vector3 LookDirection => Instance.cam.transform.forward;
 
     private void Awake()
     {

@@ -1,11 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-public class HealthSystem : MonoBehaviour, IDamagable
+public class HealthSystem : InvertableBehaviour, IDamagable
 {
     public event Action Died;
-    public event Action<float> Damaged;
-    public event Action<float> Healed;
+    public event Action<float> HealthChanged;
 
     public float MaxHealth { get; private set; }
     public float Health { get; private set; }
@@ -29,10 +28,10 @@ public class HealthSystem : MonoBehaviour, IDamagable
         if (!IsAlive || value <= 0f)
             return;
 
-        Health = Mathf.Min(Health + value, MaxHealth);
-        Damaged?.Invoke(Health);
+        Health = Mathf.Max(Health - value, 0f);
+        HealthChanged?.Invoke(Health);
 
-        if (Health >= MaxHealth)
+        if (Health <= 0f)
             OnDied();
     }
 
@@ -41,8 +40,25 @@ public class HealthSystem : MonoBehaviour, IDamagable
         if (!IsAlive || value <= 0f)
             return;
 
-        Health = Mathf.Max(Health - value, 0f);
-        Healed?.Invoke(Health);
+        Health = Mathf.Min(Health + value, MaxHealth);
+        HealthChanged?.Invoke(Health);
+
+        if (isInverted && Health <= 0f)
+            OnDied();
+    }
+
+    protected override void OnInverted()
+    {
+        if (isInverted)
+        {
+            Health = MaxHealth - Health;
+        }
+        else
+        {
+            Health = MaxHealth - Health;
+        }
+
+        HealthChanged?.Invoke(Health);
     }
 
     private void OnDied()

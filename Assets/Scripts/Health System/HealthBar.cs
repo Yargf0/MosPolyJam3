@@ -24,8 +24,7 @@ public class HealthBar : BaseUIElement
         if (healthSystem == null)
             return;
 
-        healthSystem.Damaged += OnHealthChanged;
-        healthSystem.Healed += OnHealthChanged;
+        healthSystem.HealthChanged += OnHealthChanged;
     }
 
     private void OnHealthChanged(float remainingHealth)
