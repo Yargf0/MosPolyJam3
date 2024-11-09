@@ -9,19 +9,18 @@ public class HealthPack : InvertableBehaviour, ICollectable
 
     public void Collect()
     {
-        if (TryGetComponent(out IDamagable target))
-        {
-            if (isInverted)
-            {
-                target.Damage(damageAmount);
-            }
-            else
-            {
-                target.Damage(-healAmount);
-            }
 
-            Destroy(gameObject);
+        if (isInverted)
+        {         
+            Player.Health.Damage(damageAmount);
         }
+        else
+        {
+            Player.Health.Heal(healAmount);
+        }
+
+        Destroy(gameObject);
+        
     }
 
     protected override void OnInverted()
