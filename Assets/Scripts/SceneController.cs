@@ -18,7 +18,7 @@ public static class SceneController
 
     public static void LoadLevel(int levelIndex)
     {
-        LoadScene(levelIndex - 2);
+        LoadScene(levelIndex + 1);
     }
 
     public static void LoadNextScene()

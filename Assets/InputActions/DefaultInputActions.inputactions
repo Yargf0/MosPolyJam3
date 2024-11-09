@@ -6,6 +6,15 @@
             "id": "9bcf7a70-c117-4d70-93d4-b98f9c1134a8",
             "actions": [
                 {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "64541045-b7bf-4a40-862a-20c599f1d534",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Move",
                     "type": "Value",
                     "id": "3c5d4944-959a-4469-a5a6-d815d376e2e5",
@@ -300,6 +309,28 @@
                     "action": "ScrollDelta",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "573f8c8c-e90c-46b1-9d69-8ecbefd68bf6",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "10d7836d-a0f9-470f-a446-b737d4de7317",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

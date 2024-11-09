@@ -1,4 +1,4 @@
-﻿//using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,9 +9,9 @@ public class HealthBar : BaseUIElement
 
     [Header("UI References")]
     [SerializeField] private Image image;
-    //[SerializeField] private TweenOptions tweenOptions;
+    [SerializeField] private TweenOptions tweenOptions;
 
-    //private Tween tween;
+    private Tween tween;
 
     protected override void Start()
     {
@@ -30,16 +30,15 @@ public class HealthBar : BaseUIElement
     private void OnHealthChanged(float remainingHealth)
     {
         float fillAmount = remainingHealth / healthSystem.MaxHealth;
-        image.fillAmount = fillAmount;
-        //tween?.Kill();
-        //tween = image.
-        //    DOFillAmount(fillAmount, tweenOptions.Duration).
-        //    SetEase(tweenOptions.Ease).
-        //    Play();
-        //tween.onComplete += () =>
-        //{
-        //    if (fillAmount <= 0f)
-        //        gameObject.SetActive(false);
-        //};
+        tween?.Kill();
+        tween = image.
+            DOFillAmount(fillAmount, tweenOptions.Duration).
+            SetEase(tweenOptions.Ease).
+            Play();
+        tween.onComplete += () =>
+        {
+            if (fillAmount <= 0f)
+                gameObject.SetActive(false);
+        };
     }
 }

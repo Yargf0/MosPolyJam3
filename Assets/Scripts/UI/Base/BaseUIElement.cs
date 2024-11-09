@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
-public class BaseUIElement : MonoBehaviour
+public abstract class BaseUIElement : MonoBehaviour
 {
-    public bool IsEnabled { get; protected set; }
-
     [Header("Base")]
     [SerializeField] protected bool disableOnStart;
 
@@ -15,15 +13,11 @@ public class BaseUIElement : MonoBehaviour
 
     public virtual void Show()
     {
-        IsEnabled = true;
-
-        gameObject.SetActive(IsEnabled);
+        gameObject.SetActive(true);
     }
 
     public virtual void Hide()
     {
-        IsEnabled = false;
-
-        gameObject.SetActive(IsEnabled);
+        gameObject.SetActive(false);
     }
 }
