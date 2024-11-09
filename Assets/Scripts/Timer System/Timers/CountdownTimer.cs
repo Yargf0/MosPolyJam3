@@ -12,7 +12,7 @@ public class CountdownTimer : ITimer
 
     private bool isLooped;
 
-    public CountdownTimer(float value, bool loop = false, bool play = false)
+    public CountdownTimer(float value = 0f, bool loop = false, bool play = false)
     {
         duration = value;
         isLooped = loop;
