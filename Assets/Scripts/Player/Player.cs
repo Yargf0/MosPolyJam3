@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour,
+    IGamePauseListener, IGameResumeListener
 {
     [Header("Modules")]
     [SerializeField] private PlayerCamera cam;
@@ -29,6 +30,8 @@ public class Player : MonoBehaviour
     {
         Init();
 
+        GameManager.Instance.RegisterListener(this);
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -55,6 +58,16 @@ public class Player : MonoBehaviour
     public void AddStar()
     {
         collectedStarCount++;
+    }
+
+    public void OnGamePaused()
+    {
+        input.Disable();
+    }
+
+    public void OnGameResumed()
+    {
+        input.Enable();
     }
 
     private void OnTriggerEnter(Collider other)
