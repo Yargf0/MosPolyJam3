@@ -8,7 +8,7 @@ public class FlyingEnemy : BaseEnemy
     [Space(5)]
     [SerializeField] private float waitingTime = 4f;
     [Space(5)]
-    [SerializeField] private LayerMask excludePlayerLayerMask;
+    [SerializeField] private LayerMask excludeLayerMask;
 
     [Header("Attack/Heal Settings")]
     [SerializeField] private bool isInverted;
@@ -20,11 +20,13 @@ public class FlyingEnemy : BaseEnemy
     private Transform playerTransform;
     private HealthSystem playerHealth;
 
-    private FrontFlyingEnemyBehaviour frontBehaviour;
+    private DefaultFlyingEnemyBehaviour defaultBehaviour;
+    private InvertedFlyingEnemyBehaviour invertedBehaviour;
 
     private void Start()
     {
-        frontBehaviour = new FrontFlyingEnemyBehaviour(this, moveSpeed, excludePlayerLayerMask);
+        defaultBehaviour = new DefaultFlyingEnemyBehaviour(this, moveSpeed, excludeLayerMask);
+        invertedBehaviour = new InvertedFlyingEnemyBehaviour(this, moveSpeed, excludeLayerMask);
 
         playerTransform = Player.OriginTransform;
         playerHealth = Player.Health;
@@ -34,32 +36,22 @@ public class FlyingEnemy : BaseEnemy
 
     private void Update()
     {
-        frontBehaviour.Update(Time.deltaTime);
-    }
-
-    private void TryAttack()
-    {
-        playerHealth.Damage(damage);
-    }
-
-    private void MoveToTarget()
-    {
-        transform.position = Vector3.Lerp(transform.position, targetPoint, moveSpeed * Time.deltaTime);
-    }
-
-    private void CalculateTargetPoint()
-    {
-        if (Vector3.Distance(targetPoint, playerTransform.position) < 5f)
-            return;
-
-        Vector3 randomPoint = Random.insideUnitSphere * offsetRadius;
-        randomPoint.y = Mathf.Abs(randomPoint.y);
-
-        targetPoint = playerTransform.position + randomPoint;
+        if (isInverted)
+            invertedBehaviour.Update(Time.deltaTime);
+        else
+            defaultBehaviour.Update(Time.deltaTime);
     }
 
     private void OnDied()
     {
         Destroy(gameObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (isInverted)
+            invertedBehaviour?.DrawGizmos();
+        else
+            defaultBehaviour?.DrawGizmos();
     }
 }

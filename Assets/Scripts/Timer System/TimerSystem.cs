@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class TimerSystem : MonoBehaviour
 {
-    private List<ITimer> updateTimers;
-    private List<ITimer> lateUpdateTimers;
-    private List<ITimer> fixedUpdateTimers;
+    private List<ITimer> updateTimers = new();
+    private List<ITimer> lateUpdateTimers = new();
+    private List<ITimer> fixedUpdateTimers = new();
 
     public static TimerSystem Instance { get; private set; }
 
