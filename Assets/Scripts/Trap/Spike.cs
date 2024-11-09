@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Spike : MonoBehaviour
+public class Spike : InvertableBehaviour
 {
     public float DamageInterval = 3.0f;
     public float Damage = 20f;
@@ -13,7 +13,10 @@ public class Spike : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.TryGetComponent<HealthSystem>(out HealthSystem health))
         {
-            health.Damage(Damage);
+            if (isInverted)
+                health.Damage(Damage);
+            else
+                health.Heal(Damage);
             isPlayerOnSpikes = true;
             damageCorutin = StartCoroutine(ApplyDamageOverTime(health));
         }
@@ -40,6 +43,11 @@ public class Spike : MonoBehaviour
                 health.Damage(Damage);
             }
         }
+    }
+
+    protected override void OnInverted()
+    {
+        // Здесь можно добавить реакцию на инверсию, если это потребуется
     }
 }
 
