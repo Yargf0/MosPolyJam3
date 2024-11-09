@@ -17,6 +17,7 @@ public class Player : MonoBehaviour,
 
     public static Player Instance { get; private set; }
     public static Transform OriginTransform => Instance.movement.transform;
+    public static PlayerMovement PlayerMovement => Instance.movement;
     public static HealthSystem Health => Instance.healthSystem;
     public static Vector3 CameraPosition => Instance.cam.transform.position;
     public static Vector3 LookDirection => Instance.cam.transform.forward;

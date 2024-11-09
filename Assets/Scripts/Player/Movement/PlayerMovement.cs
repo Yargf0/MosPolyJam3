@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum PlayerMovementState
@@ -13,6 +14,7 @@ public class PlayerMovement : PlayerModule
     [Header("General")]
     [SerializeField] private float walkSpeed = 30f;
     [SerializeField] private float runSpeed = 60f;
+    private float multiplayer = 1f;
     [Space(10)]
     [SerializeField, Min(0f)] private float inAirDrag;
     [SerializeField, Min(0f)] private float onGroundDrag = 4f;
@@ -70,7 +72,7 @@ public class PlayerMovement : PlayerModule
     {
         rb = GetComponent<Rigidbody>();
 
-        currentSpeed = walkSpeed;
+        currentSpeed = walkSpeed * multiplayer;
         state = PlayerMovementState.Walk;
     }
 
@@ -87,7 +89,7 @@ public class PlayerMovement : PlayerModule
 
     private void Walk()
     {
-        currentSpeed = walkSpeed;
+        currentSpeed = walkSpeed * multiplayer;
         state = PlayerMovementState.Walk;
     }
 
@@ -95,7 +97,7 @@ public class PlayerMovement : PlayerModule
     {
         if (isCrouching && isGrounded)
         {
-            currentSpeed = crouchSpeed;
+            currentSpeed = crouchSpeed* multiplayer;
             state = PlayerMovementState.Crouch;
 
             colliderTransform.localScale = new Vector3(colliderTransform.localScale.x, crouchYScale, colliderTransform.localScale.z);
@@ -117,7 +119,7 @@ public class PlayerMovement : PlayerModule
 
         if (isRunning)
         {
-            currentSpeed = runSpeed;
+            currentSpeed = runSpeed* multiplayer;
             state = PlayerMovementState.Run;
         }
         else
@@ -184,6 +186,21 @@ public class PlayerMovement : PlayerModule
             rb.drag = inAirDrag;
 
         isGrounded = isGroundedCurrentFrame;
+
+    }
+
+
+    public void ChangeSpeedTemporarily(float changeSpeedMultiplayer, float duration)
+    {
+        StartCoroutine(ChangeSpeed(changeSpeedMultiplayer, duration));
+    }
+
+    private IEnumerator ChangeSpeed(float changeSpeedMultiplayer, float duration)
+    {
+        multiplayer += changeSpeedMultiplayer;
+        yield return new WaitForSeconds(duration);
+        multiplayer -= changeSpeedMultiplayer;
+
     }
 
     private void OnDrawGizmosSelected()

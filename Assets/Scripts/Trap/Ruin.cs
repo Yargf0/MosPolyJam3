@@ -11,7 +11,6 @@ public class Ruin : InvertableBehaviour
     private Vector3 initialPosition;    
     private Collider platformCollider;
     private bool isMoving = false;
-    private bool playerOnPlatform = false;
     private Tween tween;
     public GameObject MeshPlatform;
 
