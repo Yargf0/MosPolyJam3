@@ -202,13 +202,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3d42b4186f9d74e898930aa4c1e749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  label: {fileID: 7316213871376330532}
   starFills:
   - {fileID: 2445356530552799766}
   - {fileID: 9210070045133650114}
   - {fileID: 2337086307939596378}
   - {fileID: 7506708762406935897}
   - {fileID: 4653799456982576445}
-  label: {fileID: 7316213871376330532}
 --- !u!1 &4551510498217792063
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,8 +276,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f944735afa2e0e4195332a86a50777b, type: 2}
+  m_sharedMaterial: {fileID: 830583028596689166, guid: 4f944735afa2e0e4195332a86a50777b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
