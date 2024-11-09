@@ -4,7 +4,8 @@ public class Trampoline : InvertableBehaviour
 {
     [Header("Trampoline Settings")]
     public float verticalForce = 10f;  
-    public float sideForce = 5f;       
+    public float sideForce = 5f; 
+    
 
     private void OnTriggerEnter(Collider other)
     {

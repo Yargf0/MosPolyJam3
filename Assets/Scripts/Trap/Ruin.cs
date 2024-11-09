@@ -11,6 +11,7 @@ public class Ruin : InvertableBehaviour
     private Vector3 initialPosition;    
     private Collider platformCollider;
     private bool isMoving = false;
+    private bool playerOnPlatform = false;
     private Tween tween;
     public GameObject MeshPlatform;
 
@@ -28,6 +29,18 @@ public class Ruin : InvertableBehaviour
         if (other.collider.CompareTag("Player") && !isMoving) 
         {
             TriggerPlatform();
+        }
+    }
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.collider.CompareTag("Player"))
+        {
+            if (!isInverted)
+                return;
+            tween = MeshPlatform.transform.DOMove(initialPosition - Vector3.up * fallDistance, 1f).SetDelay(returnDelay).Play().OnComplete(() =>
+            {
+                isMoving = false;
+            });
         }
     }
 
@@ -55,13 +68,7 @@ public class Ruin : InvertableBehaviour
         {
             Vector3 targetPosition = initialPosition;
 
-            tween = MeshPlatform.transform.DOMove(targetPosition, 1f).SetDelay(0).Play().OnComplete(() =>
-            {
-                tween = MeshPlatform.transform.DOMove(initialPosition - Vector3.up * fallDistance, 1f).SetDelay(returnDelay).Play().OnComplete(() =>
-                {
-                    isMoving = false;
-                });
-            });
+            tween = MeshPlatform.transform.DOMove(targetPosition, 1f).SetDelay(0).Play();
         }
 
     }
