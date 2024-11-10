@@ -30,6 +30,7 @@ public class HealthSystem : InvertableBehaviour, IDamagable
 
         Health = Mathf.Max(Health - value, 0f);
         HealthChanged?.Invoke(Health);
+        Debug.Log("Damage:" + value + "." + "Health now = " + Health);
 
         if (Health <= 0f)
             OnDied();
@@ -42,6 +43,7 @@ public class HealthSystem : InvertableBehaviour, IDamagable
 
         Health = Mathf.Min(Health + value, MaxHealth);
         HealthChanged?.Invoke(Health);
+        Debug.Log("Heal:"+value+"."+ "Health now = " + Health);
 
         if (isInverted && Health <= 0f)
             OnDied();

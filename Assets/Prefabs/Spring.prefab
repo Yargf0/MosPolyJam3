@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 357397282443728026}
+  - component: {fileID: 3793339081465659602}
+  - component: {fileID: 7939298005461715266}
+  - component: {fileID: 3752611072534559422}
   m_Layer: 0
   m_Name: Spring
   m_TagString: Untagged
@@ -26,12 +29,63 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6248764137524152813}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3793339081465659602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594580304714445164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ff80930acaf914f99b7cc2cf8d8eb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInverted: 0
+  verticalForce: 10
+  sideForce: 5
+--- !u!65 &7939298005461715266
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594580304714445164}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8.591453, y: 3.0775428, z: 8.690837}
+  m_Center: {x: 0.02424101, y: 1.0387683, z: -0.06617466}
+--- !u!114 &3752611072534559422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594580304714445164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ff80930acaf914f99b7cc2cf8d8eb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInverted: 0
+  verticalForce: 10
+  sideForce: 5
 --- !u!1001 &5850924259528846854
 PrefabInstance:
   m_ObjectHideFlags: 0

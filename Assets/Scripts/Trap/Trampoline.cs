@@ -9,22 +9,22 @@ public class Trampoline : InvertableBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && other.TryGetComponent(out Rigidbody playerRigidbody))
+        if (other.CompareTag("Player"))
         {
-            LaunchPlayer(playerRigidbody);
+            LaunchPlayer();
         }
     }
 
-    private void LaunchPlayer(Rigidbody playerRigidbody)
-    {     
+    private void LaunchPlayer()
+    {
+        Debug.Log("thth");
         Vector3 launchVelocity = Vector3.up * verticalForce;
 
         if (isInverted)
         {
             launchVelocity += Vector3.right * sideForce;
         }
-
-        playerRigidbody.velocity = launchVelocity;
+        Player.PlayerMovement.rb.velocity += launchVelocity;
     }
 
     protected override void OnInverted()

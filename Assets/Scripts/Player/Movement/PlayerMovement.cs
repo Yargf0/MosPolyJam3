@@ -43,7 +43,7 @@ public class PlayerMovement : PlayerModule
     private bool readyToJump = true;
     private bool isGrounded;
 
-    private Rigidbody rb;
+    public Rigidbody rb;
     private Transform cameraTransform;
     private Transform directionTransform;
 

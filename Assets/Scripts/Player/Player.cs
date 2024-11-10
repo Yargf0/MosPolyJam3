@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour,
@@ -78,7 +79,7 @@ public class Player : MonoBehaviour,
             collectable.Collect();
         }
     }
-
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out ICollectable collectable))

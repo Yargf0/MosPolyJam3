@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class HealthRegenerator : InvertableBehaviour
 {
-    [SerializeField] private HealthSystem healthSystem;
     [SerializeField] private float healthChangeAmount = 1f; //  оличество изменени€ здоровь€ каждую секунду
     [SerializeField] private bool isPaused = false;
 
@@ -36,12 +35,12 @@ public class HealthRegenerator : InvertableBehaviour
 
         while (elapsedTime < duration)
         {
-            if (!isPaused && healthSystem.IsAlive)
+            if (!isPaused && Player.Health.IsAlive)
             {
                 if (isInverted)
-                    healthSystem.Damage(healthChangeAmount);
+                    Player.Health.Damage(healthChangeAmount);
                 else
-                    healthSystem.Heal(healthChangeAmount);
+                    Player.Health.Heal(healthChangeAmount);
             }
 
             elapsedTime += 1f;

@@ -17,10 +17,14 @@ public class Ruin : InvertableBehaviour
     protected override void Start()
     {
         base.Start();
-        initialPosition = transform.localPosition; 
+        initialPosition = transform.position;
         platformCollider = GetComponent<Collider>();
         if(isInverted)
+        {
             MeshPlatform.transform.localPosition = MeshPlatform.transform.localPosition - Vector3.up * fallDistance;
+            initialPosition = transform.localPosition;
+        }
+            
     }
 
     private void OnCollisionEnter(Collision other)
