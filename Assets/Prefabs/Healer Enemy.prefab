@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3966961639068884941}
-  - component: {fileID: 8266450100374658482}
+  - component: {fileID: 263565527746257632}
   - component: {fileID: 5104783643445315981}
   m_Layer: 0
   m_Name: Healer Enemy
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 3374797974159294614}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8266450100374658482
+--- !u!114 &263565527746257632
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,10 +43,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1087455240118930929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ead878bd9485a74ba1fff507032ff08, type: 3}
+  m_Script: {fileID: 11500000, guid: b327a52b2a4e62546b44f5fec96b4863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInverted: 0
 --- !u!114 &5104783643445315981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d7c825304a914418a7727bc1b95e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInverted: 0
+  maxHealth: 10
   healRadius: 10
   healCooldown: 5
   healCastTime: 5

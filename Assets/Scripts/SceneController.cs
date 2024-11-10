@@ -3,8 +3,9 @@ using UnityEngine.SceneManagement;
 
 public static class SceneController
 {
-    private static int currentSceneIndex;
-    private static int scenesCount = SceneManager.sceneCountInBuildSettings;
+    private readonly static int scenesCount = SceneManager.sceneCountInBuildSettings;
+
+    private static int CurrentSceneIndex => SceneManager.GetActiveScene().buildIndex;
 
     public static void LoadMainMenu()
     {
@@ -13,7 +14,7 @@ public static class SceneController
 
     public static void ReloadScene()
     {
-        LoadScene(currentSceneIndex);
+        LoadScene(CurrentSceneIndex);
     }
 
     public static void LoadLevel(int levelIndex)
@@ -23,8 +24,8 @@ public static class SceneController
 
     public static void LoadNextScene()
     {
-        if (currentSceneIndex < scenesCount - 1)
-            LoadScene(currentSceneIndex + 1);
+        if (CurrentSceneIndex < scenesCount - 1)
+            LoadScene(CurrentSceneIndex + 1);
         else
             LoadMainMenu();
     }
@@ -32,8 +33,6 @@ public static class SceneController
     public static void LoadScene(int buildIndex)
     {
         DOTween.Clear();
-
-        currentSceneIndex = buildIndex;
         SceneManager.LoadScene(buildIndex);
     }
 }

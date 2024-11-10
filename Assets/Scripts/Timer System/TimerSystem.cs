@@ -1,24 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerSystem : MonoBehaviour
+public class TimerSystem : Singleton<TimerSystem>
 {
     private List<ITimer> updateTimers = new();
     private List<ITimer> lateUpdateTimers = new();
     private List<ITimer> fixedUpdateTimers = new();
-
-    public static TimerSystem Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else
-        {
-            Debug.LogError($"[{nameof(TimerSystem)}] Multiple instances of type");
-            enabled = false;
-        }
-    }
 
     private void Update()
     {

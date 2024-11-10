@@ -94,7 +94,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4189167049012600511}
-  - component: {fileID: 8787330676652329404}
+  - component: {fileID: 7774825597814174788}
   - component: {fileID: 6667339217354086328}
   - component: {fileID: 37026822788267703}
   m_Layer: 8
@@ -120,7 +120,7 @@ Transform:
   - {fileID: 3683562962200634669}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8787330676652329404
+--- !u!114 &7774825597814174788
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,10 +129,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2470172045080994704}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ead878bd9485a74ba1fff507032ff08, type: 3}
+  m_Script: {fileID: 11500000, guid: b327a52b2a4e62546b44f5fec96b4863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInverted: 0
 --- !u!114 &6667339217354086328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,13 +144,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06360fa7640f7dc47b50a8fb038e783a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInverted: 0
+  maxHealth: 10
   moveSpeed: 3
   offsetRadius: 2
   waitingTime: 4
   excludeLayerMask:
     serializedVersion: 2
     m_Bits: 247
-  isInverted: 0
   attackCooldown: 5
   damage: 5
 --- !u!135 &37026822788267703

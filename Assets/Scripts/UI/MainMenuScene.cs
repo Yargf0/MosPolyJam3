@@ -15,7 +15,6 @@ public class MainMenuScene : MonoBehaviour
     private void Start()
     {
         quitGameButton.onClick.AddListener(Application.Quit);
-        quitGameButton.onClick.AddListener(() => { SceneController.LoadMainMenu(); });
         StartAnimation();
     }
 
