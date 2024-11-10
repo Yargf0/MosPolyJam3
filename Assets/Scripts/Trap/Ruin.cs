@@ -21,8 +21,9 @@ public class Ruin : InvertableBehaviour
         platformCollider = GetComponent<Collider>();
         if(isInverted)
         {
-            MeshPlatform.transform.localPosition = MeshPlatform.transform.localPosition - Vector3.up * fallDistance;
-            initialPosition = transform.localPosition;
+            MeshPlatform.transform.position = MeshPlatform.transform.position - Vector3.up * fallDistance;
+            initialPosition = transform.position;
+            MeshPlatform.SetActive(false);
         }
             
     }
@@ -43,6 +44,7 @@ public class Ruin : InvertableBehaviour
             tween = MeshPlatform.transform.DOMove(initialPosition - Vector3.up * fallDistance, 1f).SetDelay(returnDelay).Play().OnComplete(() =>
             {
                 isMoving = false;
+                MeshPlatform.SetActive(false);
             });
         }
     }
@@ -59,7 +61,6 @@ public class Ruin : InvertableBehaviour
             {
                 platformCollider.enabled = false;
 
-
                 tween = transform.DOMove(initialPosition, 1f).SetDelay(returnDelay).Play().OnComplete(() =>
                 {
                     platformCollider.enabled = true;
@@ -69,6 +70,7 @@ public class Ruin : InvertableBehaviour
         }
         else
         {
+            MeshPlatform.SetActive(true);
             Vector3 targetPosition = initialPosition;
 
             tween = MeshPlatform.transform.DOMove(targetPosition, 1f).SetDelay(0).Play();
