@@ -7,7 +7,7 @@ public abstract class InvertableBehaviour : MonoBehaviour
 
     protected virtual void Start()
     {
-        InvertionSystem.Register(this);
+        //InvertionSystem.Register(this);
         OnInverted();
     }
 

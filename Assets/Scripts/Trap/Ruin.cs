@@ -55,8 +55,7 @@ public class Ruin : InvertableBehaviour
                 SetEase(tweenOptions.Ease).
                 SetDelay(delay).
                 OnStart(() => platformCollider.enabled = isInverted).
-                OnComplete(delegate
-                {
+                OnComplete(delegate {
                     isMoving = false;
                     MeshPlatform.SetActive(isInverted);
                 }).
@@ -80,7 +79,10 @@ public class Ruin : InvertableBehaviour
             tween = MeshPlatform.transform.
                 DOMoveY(endPosY, tweenOptions.Duration).
                 SetEase(tweenOptions.Ease).
-                OnComplete(() => platformCollider.enabled = true).
+                OnComplete(delegate {
+                    platformCollider.enabled = true;
+                    MeshPlatform.SetActive(!isInverted);
+                }).
                 Play();
 
             //if (!isInverted)

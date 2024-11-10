@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class HealthSystem : InvertableBehaviour, IDamagable
+public class HealthSystem : MonoBehaviour, IDamagable
 {
     public event Action Died;
     public event Action<float> HealthChanged;
@@ -19,7 +19,7 @@ public class HealthSystem : InvertableBehaviour, IDamagable
         }
 
         MaxHealth = maxHealth;
-        Health = 0f;
+        Health = MaxHealth;
         IsAlive = true;
     }
 
@@ -30,7 +30,6 @@ public class HealthSystem : InvertableBehaviour, IDamagable
 
         Health = Mathf.Max(Health - value, 0f);
         HealthChanged?.Invoke(Health);
-        Debug.Log("Damage:" + value + "." + "Health now = " + Health);
 
         if (Health <= 0f)
             OnDied();
@@ -42,24 +41,6 @@ public class HealthSystem : InvertableBehaviour, IDamagable
             return;
 
         Health = Mathf.Min(Health + value, MaxHealth);
-        HealthChanged?.Invoke(Health);
-        Debug.Log("Heal:"+value+"."+ "Health now = " + Health);
-
-        if (isInverted && Health <= 0f)
-            OnDied();
-    }
-
-    protected override void OnInverted()
-    {
-        if (isInverted)
-        {
-            Health = MaxHealth - Health;
-        }
-        else
-        {
-            Health = MaxHealth - Health;
-        }
-
         HealthChanged?.Invoke(Health);
     }
 

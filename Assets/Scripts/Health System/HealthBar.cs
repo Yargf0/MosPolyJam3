@@ -2,13 +2,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : BaseUIElement
+public class HealthBar : BaseInvertableUIElement
 {
     [Header("Health System")]
     [SerializeField] private HealthSystem healthSystem;
 
     [Header("UI References")]
-    [SerializeField] private Image image;
+    [SerializeField] private Image fillImage;
     [SerializeField] private TweenOptions tweenOptions;
 
     private Tween tween;
@@ -24,21 +24,35 @@ public class HealthBar : BaseUIElement
         if (healthSystem == null)
             return;
 
+        this.healthSystem = healthSystem;
+
+        UpdateView();
         healthSystem.HealthChanged += OnHealthChanged;
+    }
+
+    private void UpdateView()
+    {
+        float health = isInverted ? healthSystem.MaxHealth - healthSystem.Health : healthSystem.Health;
+        float fillAmount = health / healthSystem.MaxHealth;
+
+        if (fillAmount == fillImage.fillAmount)
+            return;
+
+        tween?.Kill();
+        tween = fillImage.
+            DOFillAmount(fillAmount, tweenOptions.Duration).
+            SetEase(tweenOptions.Ease).
+            OnComplete(() => gameObject.SetActive(fillAmount <= 0f)).
+            Play();
     }
 
     private void OnHealthChanged(float remainingHealth)
     {
-        float fillAmount = remainingHealth / healthSystem.MaxHealth;
-        tween?.Kill();
-        tween = image.
-            DOFillAmount(fillAmount, tweenOptions.Duration).
-            SetEase(tweenOptions.Ease).
-            Play();
-        tween.onComplete += () =>
-        {
-            if (fillAmount <= 0f)
-                gameObject.SetActive(false);
-        };
+        UpdateView();
+    }
+
+    protected override void OnInverted()
+    {
+        UpdateView();
     }
 }

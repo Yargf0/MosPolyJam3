@@ -16,7 +16,7 @@ public class HealerMageEnemy : BaseEnemy
 
     private bool CanCast => !cooldownTimer.IsPlaying && !castPreparingTimer.IsPlaying;
 
-    private void Start()
+    protected override void Start()
     {
         playerTransform = Player.OriginTransform;
      
@@ -24,11 +24,16 @@ public class HealerMageEnemy : BaseEnemy
         castPreparingTimer = new CountdownTimer();
 
         castPreparingTimer.Finished += CastHeal;
+
+        base.Start();
     }
 
     private void CastHeal()
     {
-        Debug.Log("Heal");
+        if (isInverted)
+            Debug.Log("Healer Attack");
+        else
+            Debug.Log("Healer Heal");
     }
 
     private void Update()
@@ -57,4 +62,6 @@ public class HealerMageEnemy : BaseEnemy
             Gizmos.DrawWireSphere(healPosition, 1f);
         }
     }
+
+    protected override void OnInverted() { }
 }
