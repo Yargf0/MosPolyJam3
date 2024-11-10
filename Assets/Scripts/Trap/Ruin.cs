@@ -121,7 +121,6 @@ public class Ruin : InvertableBehaviour
 
             tween = MeshPlatform.transform.DOMove(targetPosition, 1f).SetDelay(0).Play();
         }
-
     }
 
     protected override void OnInverted()

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class StarCollectable : MonoBehaviour, ICollectable
+public class StarCollectable : BaseCollectable
 {
-    public void Collect()
+    public override void Collect()
     {
         Player.AddStar();
         Destroy(gameObject);

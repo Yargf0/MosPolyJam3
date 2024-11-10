@@ -22,7 +22,12 @@ public class HealthPack : InvertableBehaviour, ICollectable
         Destroy(gameObject);
         
     }
-
+    protected void Update()
+    {
+        Vector3 direction = Player.CameraPosition - transform.position;
+        direction.y = 0;
+        transform.rotation = Quaternion.LookRotation(direction);
+    }
     protected override void OnInverted()
     {
         // Здесь можно добавить реакцию на инверсию, если это потребуется
