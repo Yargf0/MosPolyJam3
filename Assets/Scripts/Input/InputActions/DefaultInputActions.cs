@@ -89,6 +89,15 @@ public partial class @DefaultInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f58e395-a8f3-4b35-9af1-c97d0247a3c5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -322,6 +331,17 @@ public partial class @DefaultInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ScrollDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee3128d0-1caa-4bf7-a666-f085c611e0ff"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -354,6 +374,7 @@ public partial class @DefaultInputActions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_ActiveSlot = m_Player.FindAction("ActiveSlot", throwIfNotFound: true);
         m_Player_ScrollDelta = m_Player.FindAction("ScrollDelta", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
     }
 
     ~@DefaultInputActions()
@@ -427,6 +448,7 @@ public partial class @DefaultInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_ActiveSlot;
     private readonly InputAction m_Player_ScrollDelta;
+    private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
         private @DefaultInputActions m_Wrapper;
@@ -438,6 +460,7 @@ public partial class @DefaultInputActions: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @ActiveSlot => m_Wrapper.m_Player_ActiveSlot;
         public InputAction @ScrollDelta => m_Wrapper.m_Player_ScrollDelta;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -468,6 +491,9 @@ public partial class @DefaultInputActions: IInputActionCollection2, IDisposable
             @ScrollDelta.started += instance.OnScrollDelta;
             @ScrollDelta.performed += instance.OnScrollDelta;
             @ScrollDelta.canceled += instance.OnScrollDelta;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -493,6 +519,9 @@ public partial class @DefaultInputActions: IInputActionCollection2, IDisposable
             @ScrollDelta.started -= instance.OnScrollDelta;
             @ScrollDelta.performed -= instance.OnScrollDelta;
             @ScrollDelta.canceled -= instance.OnScrollDelta;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -528,5 +557,6 @@ public partial class @DefaultInputActions: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnActiveSlot(InputAction.CallbackContext context);
         void OnScrollDelta(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }

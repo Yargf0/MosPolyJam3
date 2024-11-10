@@ -13,13 +13,15 @@ public class PlayerMovement : PlayerModule
 {
     [Header("General")]
     [SerializeField] private float walkSpeed = 30f;
-    [SerializeField] private float runSpeed = 60f;
+    [SerializeField] private float maxSlopeAngle = 40f;
     [Space(10)]
     [SerializeField, Min(0f)] private float inAirDrag;
     [SerializeField, Min(0f)] private float onGroundDrag = 4f;
     [Space(10)]
     [SerializeField, Tooltip("XZ Velocity will be multiplied by value when not grounded")] private float airVelocityMultiplier = 0.001f;
-    [Space(10)]
+
+    [Header("Run Settings")]
+    [SerializeField] private float runSpeed = 60f;
     [SerializeField] private float runFovMultiplier = 1.5f;
 
     [Header("Crouch Settings")]
@@ -45,13 +47,14 @@ public class PlayerMovement : PlayerModule
     private bool readyToJump = true;
     private bool isGrounded;
 
-    public Rigidbody rb;
+    private Rigidbody rb;
     private Transform cameraTransform;
     private Transform directionTransform;
 
     private PlayerMovementState state;
 
     public Observer<float> FOVMultuplier { get; private set; } = new(1f);
+    public Rigidbody Rigidbody => rb;
 
     public void Init(PlayerInput input, PlayerCamera cam)
     {
@@ -140,28 +143,18 @@ public class PlayerMovement : PlayerModule
 
     private void HandleMovement(Vector2 moveInput)
     {
-        //Vector2 moveInput = input.Move;
-
-        //if (moveInput == Vector2.zero)
-        //    return;
-
         Vector3 force =
             moveInput.y * currentSpeed * directionTransform.forward +
             moveInput.x * currentSpeed * directionTransform.right;
 
-        // aplly air velocity multiplier (because of difference between air and ground drag)
         if (!isGrounded)
         {
             force.x *= airVelocityMultiplier;
             force.z *= airVelocityMultiplier;
         }
+        else
+            force.y -= 2f;
 
-        // clamp velocity to current speed
-        //if (velocity.magnitude > currentSpeed)
-        //    velocity = velocity.normalized * currentSpeed;
-
-        // save y velocity (need for VelocityChange force mode)
-        //velocity.y = rb.linearVelocity.y;
         rb.AddForce(force);
     }
 
@@ -191,14 +184,18 @@ public class PlayerMovement : PlayerModule
         bool isGroundedCurrentFrame = Physics.CheckSphere(transform.position, groundCheckRadius, groundLayerMask);
 
         if (isGroundedCurrentFrame && !isGrounded)
+        {
             rb.drag = onGroundDrag;
+            rb.useGravity = false;
+        }
         else if (!isGroundedCurrentFrame && isGrounded)
+        {
             rb.drag = inAirDrag;
+            rb.useGravity = true;
+        }
 
         isGrounded = isGroundedCurrentFrame;
-
     }
-
 
     public void ChangeSpeedTemporarily(float changeSpeedMultiplayer, float duration)
     {
@@ -210,7 +207,6 @@ public class PlayerMovement : PlayerModule
         speedMultiplayer += changeSpeedMultiplayer;
         yield return new WaitForSeconds(duration);
         speedMultiplayer -= changeSpeedMultiplayer;
-
     }
 
     private void OnDrawGizmosSelected()

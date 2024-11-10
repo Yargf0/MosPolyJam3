@@ -24,7 +24,7 @@ public class Trampoline : InvertableBehaviour
         {
             launchVelocity += Vector3.right * sideForce;
         }
-        Player.PlayerMovement.rb.velocity += launchVelocity;
+        Player.PlayerMovement.Rigidbody.velocity += launchVelocity;
     }
 
     protected override void OnInverted()

@@ -2,25 +2,35 @@ using System;
 
 public class CountdownTimer : ITimer
 {
-    public event Action<float> Ticked;
     public event Action Finished;
-
-    public bool IsPlaying { get; private set; }
 
     private float duration;
     private float remainingTime;
 
     private bool isLooped;
 
-    public CountdownTimer(float value = 0f, bool loop = false, bool play = false)
+    public bool IsPlaying { get; private set; }
+    public TimerUpdateType UpdateType { get; private set; }
+
+    public CountdownTimer(
+        float value = 0f,
+        TimerUpdateType updateType = TimerUpdateType.Update,
+        bool loop = false,
+        bool play = false)
     {
         duration = value;
         isLooped = loop;
+        UpdateType = updateType;
 
         if (play)
             Play();
 
-        TimerSystem.Instance.Register(this, TimerUpdateType.Update);
+        TimerSystem.Instance.Register(this, UpdateType);
+    }
+
+    ~CountdownTimer()
+    {
+        TimerSystem.Instance.Remove(this, UpdateType);
     }
 
     public void Play()
@@ -55,6 +65,11 @@ public class CountdownTimer : ITimer
 
         if (remainingTime <= 0f)
             Finish();
+    }
+
+    public void OnFinished(Action callback)
+    {
+        Finished = callback;
     }
 
     private void Reset()

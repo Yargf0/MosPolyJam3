@@ -32,13 +32,24 @@ public class FlyingEnemy : BaseEnemy
         currentBehaviour.Update(Time.deltaTime);
     }
 
+    protected override void OnInverted()
+    {
+        currentBehaviour = isInverted ? invertedBehaviour : defaultBehaviour;
+    }
+
     private void OnDrawGizmos()
     {
         currentBehaviour?.DrawGizmos();
     }
 
-    protected override void OnInverted()
+    private void OnTriggerEnter(Collider other)
     {
-        currentBehaviour = isInverted ? invertedBehaviour : defaultBehaviour;
+        if (other.CompareTag("Player"))
+        {
+            Vector3 playerVelocity = other.attachedRigidbody.velocity;
+            playerVelocity.x = playerVelocity.z = 0f;
+
+            other.attachedRigidbody.velocity = playerVelocity;
+        }
     }
 }

@@ -13,6 +13,7 @@ public class PlayerInput
     public event Action<bool> OnCrouch;
 
     public event Action OnJump;
+    public event Action OnAttack;
 
     private readonly DefaultInputActions inputActions;
 
@@ -31,6 +32,8 @@ public class PlayerInput
         inputActions.Player.Crouch.canceled += OnCrouchCanceled;
 
         inputActions.Player.Jump.performed += OnJumpPerformed;
+
+        inputActions.Player.Attack.performed += OnAttackPerformed;
 
         Enable();
     }
@@ -92,5 +95,10 @@ public class PlayerInput
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
         OnJump?.Invoke();
+    }
+
+    private void OnAttackPerformed(InputAction.CallbackContext context)
+    {
+        OnAttack?.Invoke();
     }
 }
