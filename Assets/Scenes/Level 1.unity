@@ -4643,10 +4643,10 @@ Transform:
   - {fileID: 1243394865}
   - {fileID: 920522239}
   - {fileID: 56943102}
+  - {fileID: 1459279877}
   - {fileID: 1068104405}
   - {fileID: 1490028746}
   - {fileID: 1502239840}
-  - {fileID: 1459279877}
   - {fileID: 636783751}
   - {fileID: 1327757964}
   - {fileID: 1287384769}
@@ -5500,6 +5500,7 @@ MonoBehaviour:
   inAirDrag: 0
   onGroundDrag: 7
   airVelocityMultiplier: 0.01
+  runFovMultiplier: 1.5
   crouchSpeed: 15
   crouchYScale: 0.5
   colliderTransform: {fileID: 1205445550413276415}
@@ -5895,10 +5896,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTransform: {fileID: 3758703557132752989}
-  sensetivity: {x: 250, y: 150}
+  sensetivity: {x: 800, y: 800}
   minHorizontalAngle: -90
   maxHorizontalAngle: 90
   orientationTransform: {fileID: 5578954965467946784}
+  fovTweenOptions:
+    Duration: 0.5
+    Ease: 10
 --- !u!1001 &9154706481494462438
 PrefabInstance:
   m_ObjectHideFlags: 0

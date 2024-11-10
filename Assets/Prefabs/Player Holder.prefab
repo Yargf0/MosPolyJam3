@@ -236,10 +236,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1748746649888968417}
+  - component: {fileID: 479027075964764390}
+  - component: {fileID: 1892930618123783204}
   - component: {fileID: 5236779893731065335}
   - component: {fileID: 7681776449769689871}
-  - component: {fileID: 1892930618123783204}
-  - component: {fileID: 479027075964764390}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -265,6 +265,35 @@ Transform:
   - {fileID: 4748867115590300125}
   m_Father: {fileID: 3347378959260491691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &479027075964764390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2589546541143151711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b327a52b2a4e62546b44f5fec96b4863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInverted: 0
+--- !u!114 &1892930618123783204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2589546541143151711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b8e62e288f5a84e966579afd2c4c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 7246786893318780734}
+  movement: {fileID: 5236779893731065335}
+  healthSystem: {fileID: 479027075964764390}
+  maxHealth: 100
 --- !u!114 &5236779893731065335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,35 +350,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &1892930618123783204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2589546541143151711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2b8e62e288f5a84e966579afd2c4c2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 7246786893318780734}
-  movement: {fileID: 5236779893731065335}
-  healthSystem: {fileID: 479027075964764390}
-  maxHealth: 100
---- !u!114 &479027075964764390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2589546541143151711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b327a52b2a4e62546b44f5fec96b4863, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInverted: 0
 --- !u!1 &3837278702021413459
 GameObject:
   m_ObjectHideFlags: 0

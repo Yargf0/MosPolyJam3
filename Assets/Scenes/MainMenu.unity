@@ -914,7 +914,7 @@ PrefabInstance:
       objectReference: {fileID: 1255088504}
     - target: {fileID: 1100931746847253522, guid: caa87d318322b6e49abc3f4250c6ba8f, type: 3}
       propertyPath: levelsCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1849152470773839191, guid: caa87d318322b6e49abc3f4250c6ba8f, type: 3}
       propertyPath: m_Pivot.x

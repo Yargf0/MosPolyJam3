@@ -74,6 +74,9 @@ MonoBehaviour:
   fallDelay: 1
   returnDelay: 3
   MeshPlatform: {fileID: 5628042687308247332}
+  tweenOptions:
+    Duration: 1
+    Ease: 9
 --- !u!1 &5628042687308247332
 GameObject:
   m_ObjectHideFlags: 0
