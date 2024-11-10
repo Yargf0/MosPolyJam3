@@ -4,7 +4,7 @@ public class StarCollectable : MonoBehaviour, ICollectable
 {
     public void Collect()
     {
-        Player.Instance.AddStar();
+        Player.AddStar();
         Destroy(gameObject);
     }
 }

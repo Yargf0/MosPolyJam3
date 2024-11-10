@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -50,7 +49,11 @@ public class PlayerInput
 
     public void Update()
     {
-        Vector2 rotationVector = inputActions.Player.Look.ReadValue<Vector2>();
+        if (!IsEnabled)
+            return;
+
+        //Vector2 rotationVector = inputActions.Player.Look.ReadValue<Vector2>();
+        Vector2 rotationVector = new(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"));
         if (rotationVector != Vector2.zero)
             OnRotate?.Invoke(rotationVector);
 

@@ -14,12 +14,13 @@ public class PlayerMovement : PlayerModule
     [Header("General")]
     [SerializeField] private float walkSpeed = 30f;
     [SerializeField] private float runSpeed = 60f;
-    private float multiplayer = 1f;
     [Space(10)]
     [SerializeField, Min(0f)] private float inAirDrag;
     [SerializeField, Min(0f)] private float onGroundDrag = 4f;
     [Space(10)]
     [SerializeField, Tooltip("XZ Velocity will be multiplied by value when not grounded")] private float airVelocityMultiplier = 0.001f;
+    [Space(10)]
+    [SerializeField] private float runFovMultiplier = 1.5f;
 
     [Header("Crouch Settings")]
     [SerializeField] private float crouchSpeed = 15f;
@@ -39,6 +40,7 @@ public class PlayerMovement : PlayerModule
     [SerializeField] private float groundCheckRadius = 0.1f;
 
     private float currentSpeed;
+    private float speedMultiplayer = 1f;
 
     private bool readyToJump = true;
     private bool isGrounded;
@@ -48,6 +50,8 @@ public class PlayerMovement : PlayerModule
     private Transform directionTransform;
 
     private PlayerMovementState state;
+
+    public Observer<float> FOVMultuplier { get; private set; } = new(1f);
 
     public void Init(PlayerInput input, PlayerCamera cam)
     {
@@ -72,7 +76,7 @@ public class PlayerMovement : PlayerModule
     {
         rb = GetComponent<Rigidbody>();
 
-        currentSpeed = walkSpeed * multiplayer;
+        currentSpeed = walkSpeed * speedMultiplayer;
         state = PlayerMovementState.Walk;
     }
 
@@ -89,19 +93,23 @@ public class PlayerMovement : PlayerModule
 
     private void Walk()
     {
-        currentSpeed = walkSpeed * multiplayer;
+        currentSpeed = walkSpeed * speedMultiplayer;
         state = PlayerMovementState.Walk;
+
+        FOVMultuplier.Value = 1f;
     }
 
     private void Crouch(bool isCrouching)
     {
         if (isCrouching && isGrounded)
         {
-            currentSpeed = crouchSpeed* multiplayer;
+            currentSpeed = crouchSpeed * speedMultiplayer;
             state = PlayerMovementState.Crouch;
 
             colliderTransform.localScale = new Vector3(colliderTransform.localScale.x, crouchYScale, colliderTransform.localScale.z);
             fbxRootTransform.localScale = new Vector3(fbxRootTransform.localScale.x, crouchYScale, fbxRootTransform.localScale.z);
+
+            FOVMultuplier.Value = 1f;
         }
         else
         {
@@ -119,8 +127,10 @@ public class PlayerMovement : PlayerModule
 
         if (isRunning)
         {
-            currentSpeed = runSpeed* multiplayer;
+            currentSpeed = runSpeed* speedMultiplayer;
             state = PlayerMovementState.Run;
+
+            FOVMultuplier.Value = runFovMultiplier;
         }
         else
         {
@@ -197,9 +207,9 @@ public class PlayerMovement : PlayerModule
 
     private IEnumerator ChangeSpeed(float changeSpeedMultiplayer, float duration)
     {
-        multiplayer += changeSpeedMultiplayer;
+        speedMultiplayer += changeSpeedMultiplayer;
         yield return new WaitForSeconds(duration);
-        multiplayer -= changeSpeedMultiplayer;
+        speedMultiplayer -= changeSpeedMultiplayer;
 
     }
 
