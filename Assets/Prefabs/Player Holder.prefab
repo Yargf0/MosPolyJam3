@@ -106,10 +106,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTransform: {fileID: 5510089697968391989}
-  sensetivity: {x: 250, y: 150}
+  sensetivity: {x: 800, y: 800}
   minHorizontalAngle: -90
   maxHorizontalAngle: 90
   orientationTransform: {fileID: 4748867115590300125}
+  fovTweenOptions:
+    Duration: 0.5
+    Ease: 10
 --- !u!1 &1928872576261676586
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,6 +282,7 @@ MonoBehaviour:
   inAirDrag: 0
   onGroundDrag: 7
   airVelocityMultiplier: 0.01
+  runFovMultiplier: 1.5
   crouchSpeed: 15
   crouchYScale: 0.5
   colliderTransform: {fileID: 1727696184272292655}

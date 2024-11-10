@@ -16,16 +16,26 @@ public class Player : MonoBehaviour,
     
     private PlayerInput input;
 
-    public static Player Instance { get; private set; }
-    public static Transform OriginTransform => Instance.movement.transform;
-    public static PlayerMovement PlayerMovement => Instance.movement;
-    public static HealthSystem Health => Instance.healthSystem;
-    public static Vector3 CameraPosition => Instance.cam.transform.position;
-    public static Vector3 LookDirection => Instance.cam.transform.forward;
+    public static Transform OriginTransform => instance.movement.transform;
+    public static PlayerMovement PlayerMovement => instance.movement;
+    public static Observer<float> FOVMultiplier => instance.movement.FOVMultuplier;
+
+    public static HealthSystem Health => instance.healthSystem;
+
+    public static Vector3 CameraPosition => instance.cam.transform.position;
+    public static Vector3 LookDirection => instance.cam.transform.forward;
+
+    private static Player instance;
 
     private void Awake()
     {
-        Instance = this;
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Debug.LogError($"[{nameof(Player)}] Multiple instances of type");
+            enabled = false;
+        }
     }
 
     private void Start()
@@ -57,9 +67,9 @@ public class Player : MonoBehaviour,
         input.FixedUpdate();
     }
 
-    public void AddStar()
+    public static void AddStar()
     {
-        collectedStarCount++;
+        instance.collectedStarCount++;
     }
 
     public void OnGamePaused()
