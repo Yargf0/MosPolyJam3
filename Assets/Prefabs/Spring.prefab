@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 357397282443728026}
   - component: {fileID: 3793339081465659602}
   - component: {fileID: 7939298005461715266}
-  - component: {fileID: 3752611072534559422}
+  - component: {fileID: 7379784741164603310}
   m_Layer: 0
   m_Name: Spring
   m_TagString: Untagged
@@ -48,8 +48,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInverted: 0
-  verticalForce: 10
+  spawnGlitchEffectOnStart: 0
+  glitchEffectPrefab: {fileID: 0}
+  glitchScale: 1
+  verticalForce: 30
   sideForce: 5
+  animator: {fileID: 7379784741164603310}
 --- !u!65 &7939298005461715266
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71,21 +75,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.591453, y: 3.0775428, z: 8.690837}
   m_Center: {x: 0.02424101, y: 1.0387683, z: -0.06617466}
---- !u!114 &3752611072534559422
-MonoBehaviour:
+--- !u!95 &7379784741164603310
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594580304714445164}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36ff80930acaf914f99b7cc2cf8d8eb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInverted: 0
-  verticalForce: 10
-  sideForce: 5
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 282c7eaa84ed58a43865e0790afc47ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &5850924259528846854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108,11 +118,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e40ba918cb309749b997c231feab74c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e40ba918cb309749b997c231feab74c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e40ba918cb309749b997c231feab74c, type: 3}
       propertyPath: m_LocalRotation.y
@@ -120,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e40ba918cb309749b997c231feab74c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e40ba918cb309749b997c231feab74c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
