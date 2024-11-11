@@ -22,8 +22,20 @@ public class PlayerCamera : PlayerModule
     private Tween tween;
     private Camera cam;
     private float defaultFOV;
+    private float currentFOV;
 
     public Transform DirectionXZTransform => orientationTransform;
+
+
+    public Rigidbody rb;              // Ссылка на Rigidbody игрока
+
+    public float minFOV = 45f;        // Минимальное значение FOV
+    public float maxFOV = 120f;       // Максимальное значение FOV
+    public float walkSpeed = 5.71f;   // Скорость при ходьбе
+    public float runSpeed = 9f;      // Скорость при беге
+    public float walkFOV = 60f;       // FOV при ходьбе
+    public float runFOV = 80f;        // FOV при беге
+    public float transitionSpeed = 5f;
 
     public override void Init(PlayerInput input)
     {
@@ -31,18 +43,30 @@ public class PlayerCamera : PlayerModule
 
         input.OnRotate += Rotate;
 
-        Player.Instance.FOVMultiplier.ValueChanged += OnFOVMultiplierValueChanged;
+       // Player.Instance.FOVMultiplier.ValueChanged += OnFOVMultiplierValueChanged;
     }
 
     private void Start()
     {
         cam = GetComponent<Camera>();
         defaultFOV = cam.fieldOfView;
+        currentFOV = cam.fieldOfView;
+
+        runSpeed = (Player.Instance.PlayerMovement.runSpeed / Player.Instance.PlayerMovement.onGroundDrag)-1;
+        walkSpeed = Player.Instance.PlayerMovement.walkSpeed / Player.Instance.PlayerMovement.onGroundDrag;
+        rb = Player.Instance.PlayerMovement.Rigidbody;
     }
 
     private void Update()
     {
         Move();
+        float  horizontalSpeed = new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude;
+
+        float targetFOV = CalculateFOV(horizontalSpeed);
+        targetFOV = targetFOV*Player.Instance.PlayerMovement.speedMultiplayer;
+        currentFOV = Mathf.Lerp(currentFOV, targetFOV, Time.deltaTime * transitionSpeed);
+        cam.fieldOfView = Mathf.Clamp(currentFOV, minFOV, maxFOV);
+        //OnFOVMultiplierValueChanged(targetFOV);
     }
 
     private void Move()
@@ -61,7 +85,15 @@ public class PlayerCamera : PlayerModule
         orientationTransform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
 
-    private void OnFOVMultiplierValueChanged(float prevValue, float newValue)
+
+    // Функция для вычисления FOV на основе скорости
+    float CalculateFOV(float speed)
+    {
+        // Линейная интерполяция для получения FOV в зависимости от скорости
+        float fov = Mathf.Lerp(walkFOV, runFOV, (speed - walkSpeed) / (runSpeed - walkSpeed));
+        return fov;
+    }
+    private void OnFOVMultiplierValueChanged(float newValue)
     {
         tween?.Kill();
         tween = cam.DOFieldOfView(defaultFOV * newValue, fovTweenOptions.Duration).

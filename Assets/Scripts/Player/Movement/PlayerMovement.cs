@@ -12,18 +12,18 @@ public enum PlayerMovementState
 public class PlayerMovement : PlayerModule
 {
     [Header("General")]
-    [SerializeField] private float walkSpeed = 30f;
+    public float walkSpeed = 30f;
     [SerializeField] private float maxSlopeAngle = 40f;
     [Space(10)]
     [SerializeField, Min(0f)] private float inAirDrag;
-    [SerializeField, Min(0f)] private float onGroundDrag = 4f;
+    public float onGroundDrag = 7f;
     [Space(10)]
     [SerializeField, Tooltip("XZ Velocity will be multiplied by value when not grounded")] private float airVelocityMultiplier = 0.001f;
     [SerializeField] private float airVelocityMultiplierOnSpring = 1f;
 
     [Header("Run Settings")]
-    [SerializeField] private float runSpeed = 60f;
-    [SerializeField] private float runFovMultiplier = 1.5f;
+    public float runSpeed = 60f;
+    //[SerializeField] private float runFovMultiplier = 1.5f;
 
     [Header("Crouch Settings")]
     [SerializeField] private float crouchSpeed = 15f;
@@ -42,14 +42,14 @@ public class PlayerMovement : PlayerModule
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private float groundCheckRadius = 0.1f;
 
-    private float currentSpeed;
-    private float speedMultiplayer = 1f;
+    public float currentSpeed;
+    public float speedMultiplayer = 1f;
 
     private bool readyToJump = true;
     private bool isGrounded;
     private bool isOnSpring=false;
 
-    private Rigidbody rb;
+    public Rigidbody rb;
     private Transform cameraTransform;
     private Transform directionTransform;
 
@@ -140,7 +140,7 @@ public class PlayerMovement : PlayerModule
             currentSpeed = runSpeed * speedMultiplayer;
             state = PlayerMovementState.Run;
 
-            FOVMultuplier.Value = runFovMultiplier;
+           // FOVMultuplier.Value = runFovMultiplier;
         }
         else
         {

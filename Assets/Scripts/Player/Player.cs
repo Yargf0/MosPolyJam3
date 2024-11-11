@@ -19,7 +19,7 @@ public class Player : MonoBehaviour,
 
     public  Transform OriginTransform => movement.transform;
     public PlayerMovement PlayerMovement => movement;
-    public Observer<float> FOVMultiplier => movement.FOVMultuplier;
+    //public Observer<float> FOVMultiplier => movement.FOVMultuplier;
 
     public HealthSystem Health => healthSystem;
 

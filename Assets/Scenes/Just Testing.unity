@@ -5566,6 +5566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6094878267227852911, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7137763130574178019, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6106,7 +6110,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -6282,7 +6286,6 @@ MonoBehaviour:
   airVelocityMultiplier: 0.01
   airVelocityMultiplierOnSpring: 0.1
   runSpeed: 70
-  runFovMultiplier: 1.5
   crouchSpeed: 15
   crouchYScale: 0.5
   colliderTransform: {fileID: 1205445550413276415}
@@ -6293,6 +6296,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheckRadius: 0.1
+  currentSpeed: 0
+  speedMultiplayer: 1
+  rb: {fileID: 0}
 --- !u!54 &3955889226902351169
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6640,6 +6646,14 @@ MonoBehaviour:
   fovTweenOptions:
     Duration: 0.5
     Ease: 10
+  rb: {fileID: 0}
+  minFOV: 45
+  maxFOV: 120
+  walkSpeed: 5.71
+  runSpeed: 10
+  walkFOV: 60
+  runFOV: 90
+  transitionSpeed: 5
 --- !u!1001 &8929568107526953808
 PrefabInstance:
   m_ObjectHideFlags: 0
