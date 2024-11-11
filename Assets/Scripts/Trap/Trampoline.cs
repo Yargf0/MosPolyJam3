@@ -5,6 +5,8 @@ public class Trampoline : InvertableBehaviour
     [Header("Trampoline Settings")]
     public float verticalForce = 10f;
     public float sideForce = 5f;
+    [SerializeField] private Animator animator;
+    private readonly int AnimationHash = Animator.StringToHash("activated");
 
 
     private void OnTriggerEnter(Collider other)
@@ -17,7 +19,7 @@ public class Trampoline : InvertableBehaviour
 
     private void LaunchPlayer()
     {
-        Debug.Log("thth");
+        animator.Play(AnimationHash);
         Vector3 launchVelocity = Vector3.up * verticalForce;
 
         if (isInverted)
