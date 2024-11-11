@@ -152,11 +152,10 @@ public class PlayerMovement : PlayerModule
             force.x *= airVelocityMultiplier;
             force.z *= airVelocityMultiplier;
         }
-        else
+        else if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, groundCheckRadius, groundLayerMask))
         {
-
-
-            force.y -= 4f;
+            Vector3 parallelVector = Vector3.Cross(hitInfo.normal, Vector3.Cross(force, hitInfo.normal)).normalized;
+            force = currentSpeed * parallelVector;
         }
 
         rb.AddForce(force);
@@ -202,7 +201,6 @@ public class PlayerMovement : PlayerModule
         }
 
         isGrounded = isGroundedCurrentFrame;
-        Debug.Log("Grounded Changed: " + isGrounded);
     }
 
     public void ChangeSpeedTemporarily(float changeSpeedMultiplayer, float duration)
