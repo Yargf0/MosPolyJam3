@@ -9,6 +9,7 @@ public class Player : MonoBehaviour,
     [SerializeField] private PlayerMovement movement;
     [SerializeField] private HealthSystem healthSystem;
     [SerializeField] private BaseWeapon weapon;
+    [SerializeField] private BaseWeapon secondWeapon;
 
     [Header("Stats")]
     [SerializeField] private float maxHealth = 100f;
@@ -58,6 +59,7 @@ public class Player : MonoBehaviour,
         healthSystem.Init(maxHealth);
 
         weapon.Init(input);
+        secondWeapon.Init(input);
 
         healthSystem.Died += () => StartCoroutine(OnDied());;
     }

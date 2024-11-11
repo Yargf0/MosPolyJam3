@@ -3546,7 +3546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6859816508919565791, guid: 786e11dc100ff404ab1fbb380a10b9ed, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3558,6 +3558,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 145199610409294123, guid: 786e11dc100ff404ab1fbb380a10b9ed, type: 3}
   m_PrefabInstance: {fileID: 1287589609}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1287589611 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8625753173980611539, guid: 786e11dc100ff404ab1fbb380a10b9ed, type: 3}
+  m_PrefabInstance: {fileID: 1287589609}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24cc19f99f7d6a0449d11db71a421eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1293156258
 GameObject:
   m_ObjectHideFlags: 0
@@ -6340,6 +6351,7 @@ GameObject:
   - component: {fileID: 4503447534754853091}
   - component: {fileID: 4503447534754853090}
   - component: {fileID: 4503447534754853092}
+  - component: {fileID: 4503447534754853093}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -6374,7 +6386,8 @@ MonoBehaviour:
   cam: {fileID: 8604823355303510190}
   movement: {fileID: 3783714277595241028}
   healthSystem: {fileID: 4503447534754853090}
-  weapon: {fileID: 2022616100}
+  weapon: {fileID: 1287589611}
+  secondWeapon: {fileID: 2022616100}
   maxHealth: 100
 --- !u!114 &4503447534754853092
 MonoBehaviour:
@@ -6389,6 +6402,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yPostionTester: -15
+--- !u!114 &4503447534754853093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4503447534754853089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aaf512efff1d7b45bbeeecc4d2c6492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 1287589611}
+  - {fileID: 2022616100}
 --- !u!4 &4644691943203523331
 Transform:
   m_ObjectHideFlags: 0
@@ -6500,6 +6528,7 @@ GameObject:
   - component: {fileID: 808326090999838366}
   - component: {fileID: 1913653251465988078}
   - component: {fileID: 8604823355303510190}
+  - component: {fileID: 8604823355303510191}
   m_Layer: 7
   m_Name: Player Camera
   m_TagString: MainCamera
@@ -6552,6 +6581,10 @@ PrefabInstance:
       propertyPath: damage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2525578087491747160, guid: 45d837b4fa773ee4085fd34462a4896f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2858003729553106224, guid: 45d837b4fa773ee4085fd34462a4896f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6595,6 +6628,10 @@ PrefabInstance:
     - target: {fileID: 7926269955508321597, guid: 45d837b4fa773ee4085fd34462a4896f, type: 3}
       propertyPath: m_Name
       value: Bow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926269955508321597, guid: 45d837b4fa773ee4085fd34462a4896f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6654,6 +6691,21 @@ MonoBehaviour:
   walkFOV: 60
   runFOV: 90
   transitionSpeed: 5
+--- !u!114 &8604823355303510191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424479017452442723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aaf512efff1d7b45bbeeecc4d2c6492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 1287589611}
+  - {fileID: 2022616100}
 --- !u!1001 &8929568107526953808
 PrefabInstance:
   m_ObjectHideFlags: 0
