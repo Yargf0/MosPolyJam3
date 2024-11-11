@@ -57,6 +57,8 @@ public class Player : MonoBehaviour,
         healthSystem.Init(maxHealth);
 
         weapon.Init(input);
+
+        healthSystem.Died += SceneController.ReloadScene;
     }
 
     private void Update()
