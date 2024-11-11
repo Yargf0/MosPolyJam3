@@ -26,7 +26,7 @@ MonoBehaviour:
   chaseAngle:
     min: -20
     max: 20
-  damage: 1
+  damage: 10
   attackDistance: 4
   attackOverlapRadius: 1
   playerLayerMask:

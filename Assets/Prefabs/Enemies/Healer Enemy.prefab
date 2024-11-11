@@ -64,11 +64,11 @@ MonoBehaviour:
   spawnGlitchEffectOnStart: 0
   glitchEffectPrefab: {fileID: 0}
   glitchScale: 1
-  maxHealth: 10
-  healValue: 1
-  healRadius: 10
+  maxHealth: 15
+  healValue: 20
+  healRadius: 15
   healCooldown: 5
-  healCastTime: 5
+  healCastTime: 1
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 128

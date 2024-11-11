@@ -6146,6 +6146,7 @@ GameObject:
   - component: {fileID: 3955889226902351169}
   - component: {fileID: 4503447534754853091}
   - component: {fileID: 4503447534754853090}
+  - component: {fileID: 4503447534754853092}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -6182,6 +6183,19 @@ MonoBehaviour:
   healthSystem: {fileID: 4503447534754853090}
   weapon: {fileID: 2022616100}
   maxHealth: 100
+--- !u!114 &4503447534754853092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4503447534754853089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4484eb5d1ddf7c1478759619684beedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yPostionTester: -30
 --- !u!4 &4644691943203523331
 Transform:
   m_ObjectHideFlags: 0
@@ -6191,7 +6205,7 @@ Transform:
   m_GameObject: {fileID: 5235945192689466899}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -9.370508, y: 5.89, z: -8.174713}
+  m_LocalPosition: {x: -9.370508, y: 7.77, z: -8.174713}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
