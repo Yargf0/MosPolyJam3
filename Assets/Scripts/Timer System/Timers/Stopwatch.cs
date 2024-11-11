@@ -1,25 +1,22 @@
-using System;
+﻿using System;
 
-public class CountdownTimer : ITimer
+public class Stopwatch : ITimer
 {
     public event Action Started;
+    public event Action<float> Ticked;
     public event Action Finished;
 
-    private float duration;
-    private float remainingTime;
-
+    private float time;
     private bool isLooped;
 
     public bool IsPlaying { get; private set; }
     public TimerUpdateType UpdateType { get; private set; }
 
-    public CountdownTimer(
-        float value = 0f,
+    public Stopwatch(
         TimerUpdateType updateType = TimerUpdateType.Update,
         bool loop = false,
         bool play = false)
     {
-        duration = value;
         isLooped = loop;
         UpdateType = updateType;
 
@@ -29,27 +26,28 @@ public class CountdownTimer : ITimer
         TimerSystem.Instance.Register(this, UpdateType);
     }
 
-    ~CountdownTimer()
+    ~Stopwatch()
     {
         TimerSystem.Instance.Remove(this, UpdateType);
     }
 
-    public void Play()
+    public void Tick(float deltaTime)
     {
-        if (IsPlaying || remainingTime <= 0f)
+        if (!IsPlaying)
             return;
 
-        IsPlaying = true;
-        Started?.Invoke();
+        time += deltaTime;
+        Ticked?.Invoke(time);
     }
 
-    public void Play(float time)
+    public void Play(bool reset = false)
     {
-        if (IsPlaying || time <= 0f)
+        if (IsPlaying)
             return;
 
-        duration = time;
-        remainingTime = duration;
+        if (reset)
+            time = 0f;
+
         IsPlaying = true;
         Started?.Invoke();
     }
@@ -59,40 +57,31 @@ public class CountdownTimer : ITimer
         IsPlaying = false;
     }
 
-    public void Tick(float deltaTime)
+    public void Finish()
     {
-        if (!IsPlaying)
+        if (isLooped)
+        {
+            time = 0f;
+            Finished?.Invoke();
+            Started?.Invoke();
             return;
+        }
 
-        remainingTime -= deltaTime;
-
-        if (remainingTime <= 0f)
-            Finish();
+        IsPlaying = false;
+        Finished?.Invoke();
     }
 
     public void Reset()
     {
         IsPlaying = false;
-        remainingTime = duration;
+        time = 0f;
         Started = null;
+        Ticked = null;
         Finished = null;
     }
 
     public void OnFinished(Action callback)
     {
         Finished = callback;
-    }
-
-    private void Finish()
-    {
-        if (isLooped)
-        {
-            remainingTime = duration;
-            Started?.Invoke();
-        }
-        else
-            IsPlaying = false;
-
-        Finished?.Invoke();
     }
 }

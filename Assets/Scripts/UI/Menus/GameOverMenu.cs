@@ -20,6 +20,7 @@ public class GameOverMenu : BaseMenu
     private void OnPlayerDied()
     {
         Show();
+        Cursor.lockState = CursorLockMode.Locked;
         GameManager.Instance.PauseGame();
     }
 }
