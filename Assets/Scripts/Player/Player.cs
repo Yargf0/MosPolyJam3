@@ -8,7 +8,7 @@ public class Player : MonoBehaviour,
     [SerializeField] private PlayerCamera cam;
     [SerializeField] private PlayerMovement movement;
     [SerializeField] private HealthSystem healthSystem;
-    [SerializeField] private PlayerModule weapon;
+    [SerializeField] private BaseWeapon weapon;
 
     [Header("Stats")]
     [SerializeField] private float maxHealth = 100f;
@@ -37,19 +37,19 @@ public class Player : MonoBehaviour,
             Debug.LogError($"[{nameof(Player)}] Multiple instances of type");
             enabled = false;
         }
+
+        Init();
     }
 
     private void Start()
     {
-        Init();
-
-        GameManager.Instance.RegisterListener(this);
-
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Init()
     {
+        GameManager.Instance.RegisterListener(this);
+
         input = new PlayerInput();
 
         cam.Init(input);

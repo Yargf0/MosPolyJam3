@@ -70,8 +70,8 @@ public class TimerSystem : Singleton<TimerSystem>
 
     private void Tick(List<ITimer> timers, float deltaTime)
     {
-        foreach (var timer in timers)
-            timer.Tick(deltaTime);
+        for (int i = 0; i < timers.Count; i++)
+            timers[i].Tick(deltaTime);
     }
 
     private List<ITimer> GetTimersList(TimerUpdateType updateType)

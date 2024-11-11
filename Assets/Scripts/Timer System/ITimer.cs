@@ -2,6 +2,7 @@
 
 public interface ITimer
 {
+    public event Action Started;
     public event Action Finished;
 
     public bool IsPlaying { get; }

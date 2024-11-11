@@ -15,8 +15,10 @@ public class HealthBar : BaseInvertableUIElement
 
     protected override void Start()
     {
-        base.Start();
         SetHealthSystem(healthSystem);
+
+        if (disableOnStart)
+            gameObject.SetActive(false);
     }
 
     public void SetHealthSystem(HealthSystem healthSystem)
@@ -44,6 +46,8 @@ public class HealthBar : BaseInvertableUIElement
             SetEase(tweenOptions.Ease).
             OnComplete(() => gameObject.SetActive(fillAmount <= 0f)).
             Play();
+
+        Debug.Log("Start");
     }
 
     private void OnHealthChanged(float remainingHealth)

@@ -3,17 +3,17 @@ using UnityEngine;
 [RequireComponent(typeof(HealthSystem))]
 public abstract class BaseEnemy : InvertableBehaviour
 {
+    [Header("Health")]
     [SerializeField] private float maxHealth = 10f;
-    protected HealthSystem healthSystem;
-
-    public HealthSystem HealthSystem => healthSystem;
+    
+    public HealthSystem HealthSystem { get; protected set; }
 
     protected virtual void Awake()
     {
-        healthSystem = GetComponent<HealthSystem>();
-        healthSystem.Init(maxHealth);
+        HealthSystem = GetComponent<HealthSystem>();
+        HealthSystem.Init(maxHealth);
 
-        healthSystem.Died += OnDied;
+        HealthSystem.Died += OnDied;
     }
 
     protected virtual void OnDied()

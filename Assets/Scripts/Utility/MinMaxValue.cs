@@ -1,3 +1,6 @@
+using System;
+
+[Serializable]
 public struct MinMaxValue<T>
 {
     public T min;
