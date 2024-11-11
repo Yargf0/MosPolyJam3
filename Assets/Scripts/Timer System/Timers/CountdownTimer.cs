@@ -2,6 +2,7 @@ using System;
 
 public class CountdownTimer : ITimer
 {
+    public event Action Started;
     public event Action Finished;
 
     private float duration;
@@ -39,6 +40,7 @@ public class CountdownTimer : ITimer
             return;
 
         IsPlaying = true;
+        Started?.Invoke();
     }
 
     public void Play(float time)
@@ -49,6 +51,7 @@ public class CountdownTimer : ITimer
         duration = time;
         remainingTime = duration;
         IsPlaying = true;
+        Started?.Invoke();
     }
 
     public void Stop()
@@ -67,20 +70,25 @@ public class CountdownTimer : ITimer
             Finish();
     }
 
+    public void Reset()
+    {
+        IsPlaying = false;
+        remainingTime = duration;
+        Finished = null;
+    }
+
     public void OnFinished(Action callback)
     {
         Finished = callback;
     }
 
-    private void Reset()
-    {
-        remainingTime = duration;
-    }
-
     private void Finish()
     {
         if (isLooped)
-            Reset();
+        {
+            remainingTime = duration;
+            Started?.Invoke();
+        }
         else
             IsPlaying = false;
 

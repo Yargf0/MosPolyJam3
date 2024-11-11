@@ -1,14 +1,11 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class Sword : PlayerModule
+public class Sword : BaseWeapon
 {
-    [Header("Settings")]
-    [SerializeField] private float damage = 1f;
+    [Space(5)]
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRadius = 1f;
-    [SerializeField] private LayerMask enemyLayerMask;
-    [SerializeField] private float attackCooldown = 2f;
 
     [Header("References")]
     [SerializeField] private Transform handGripTransform;
@@ -18,20 +15,9 @@ public class Sword : PlayerModule
 
     private Sequence sequence;
 
-    private CountdownTimer attackCooldownTimer;
-
-    public override void Init(PlayerInput input)
+    protected override void Animate()
     {
-        base.Init(input);
-
-        input.OnAttack += Animate;
-
-        attackCooldownTimer = new CountdownTimer();
-    }
-
-    private void Animate()
-    {
-        if (attackCooldownTimer.IsPlaying)
+        if (cooldownTimer.IsPlaying)
             return;
 
         sequence?.Kill();
@@ -45,10 +31,10 @@ public class Sword : PlayerModule
                 SetEase(tweenOptions.Ease)).
             Play();
 
-        attackCooldownTimer.Play(attackCooldown);
+        cooldownTimer.Play(cooldown);
     }
 
-    private void Attack()
+    protected override void Attack()
     {
         Collider[] enemiesColliders = Physics.OverlapSphere(attackPoint.position, attackRadius, enemyLayerMask);
 

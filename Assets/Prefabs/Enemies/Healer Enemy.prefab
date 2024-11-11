@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3966961639068884941}
   - component: {fileID: 263565527746257632}
   - component: {fileID: 5104783643445315981}
+  - component: {fileID: 8227051828912510615}
   m_Layer: 0
   m_Name: Healer Enemy
   m_TagString: Untagged
@@ -32,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3374797974159294614}
+  - {fileID: 613722522133555302}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &263565527746257632
@@ -59,10 +61,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInverted: 0
+  spawnGlitchEffectOnStart: 0
+  glitchEffectPrefab: {fileID: 0}
+  glitchScale: 1
   maxHealth: 10
+  healValue: 1
   healRadius: 10
   healCooldown: 5
   healCastTime: 5
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  projectileSpawnPoint: {fileID: 613722522133555302}
+  healParticlePrefab: {fileID: 851787304454013999, guid: e27dcb04b52c6384b8c510872cebc8ee, type: 3}
+  moveSpeed: 0.01
+--- !u!136 &8227051828912510615
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087455240118930929}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3031857246102810602
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +181,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5857648771220370575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 613722522133555302}
+  m_Layer: 0
+  m_Name: Heal Particle Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &613722522133555302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857648771220370575}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3966961639068884941}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6513476757353884970
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +256,6 @@ GameObject:
   - component: {fileID: 1604812474345242527}
   - component: {fileID: 1735552036104368232}
   - component: {fileID: 1499658850723693702}
-  - component: {fileID: 5643474540692027427}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -263,26 +328,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5643474540692027427
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8702956192891441283}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}

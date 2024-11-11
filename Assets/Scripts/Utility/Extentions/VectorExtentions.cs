@@ -23,4 +23,18 @@ public static class VectorExtentions
     {
         return Vector3.Angle(from.eulerAngles, to.eulerAngles);
     }
+
+    // Direction
+    public static Vector3 Direction(this Transform from, Transform to)
+    {
+        return from.position - to.position;
+    }
+
+    public static Vector3 DirectionXZ(this Transform from, Transform to)
+    {
+        Vector3 direction = from.position - to.position;
+        direction.y = 0f;
+
+        return direction;
+    }
 }
