@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Trampoline : InvertableBehaviour
@@ -13,11 +14,11 @@ public class Trampoline : InvertableBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            LaunchPlayer();
+            StartCoroutine(LaunchPlayer());
         }
     }
 
-    private void LaunchPlayer()
+    private IEnumerator LaunchPlayer()
     {
         animator.Play(AnimationHash);
         Vector3 launchVelocity = Vector3.up * verticalForce;
@@ -26,7 +27,9 @@ public class Trampoline : InvertableBehaviour
         {
             launchVelocity += Vector3.right * sideForce;
         }
-        Player.PlayerMovement.Rigidbody.velocity += launchVelocity;
+        Player.PlayerMovement.Rigidbody.velocity = launchVelocity;
+        yield return new WaitForSeconds(0.1f);
+        Player.PlayerMovement.JumpOnSpring();
     }
 
     protected override void OnInverted()

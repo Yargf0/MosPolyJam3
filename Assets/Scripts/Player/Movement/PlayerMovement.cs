@@ -19,6 +19,7 @@ public class PlayerMovement : PlayerModule
     [SerializeField, Min(0f)] private float onGroundDrag = 4f;
     [Space(10)]
     [SerializeField, Tooltip("XZ Velocity will be multiplied by value when not grounded")] private float airVelocityMultiplier = 0.001f;
+    [SerializeField] private float airVelocityMultiplierOnSpring = 1f;
 
     [Header("Run Settings")]
     [SerializeField] private float runSpeed = 60f;
@@ -46,6 +47,7 @@ public class PlayerMovement : PlayerModule
 
     private bool readyToJump = true;
     private bool isGrounded;
+    private bool isOnSpring=false;
 
     private Rigidbody rb;
     private Transform cameraTransform;
@@ -92,6 +94,11 @@ public class PlayerMovement : PlayerModule
     {
         //HandleMovement();
         CalculateGrounded();
+    }
+
+    public void JumpOnSpring()
+    {
+        isOnSpring = true;
     }
 
     private void Walk()
@@ -146,8 +153,12 @@ public class PlayerMovement : PlayerModule
         Vector3 force =
             moveInput.y * currentSpeed * directionTransform.forward +
             moveInput.x * currentSpeed * directionTransform.right;
-
-        if (!isGrounded)
+        if(isOnSpring)
+        {
+            force.x *= airVelocityMultiplierOnSpring;
+            force.z *= airVelocityMultiplierOnSpring;
+        }
+        else if (!isGrounded)
         {
             force.x *= airVelocityMultiplier;
             force.z *= airVelocityMultiplier;
@@ -191,6 +202,7 @@ public class PlayerMovement : PlayerModule
 
         if (isGroundedCurrentFrame && !isGrounded)
         {
+            isOnSpring = false;
             rb.drag = onGroundDrag;
             rb.useGravity = false;
         }
