@@ -22,7 +22,7 @@ public class Bow : BaseWeapon
 
     protected override void Attack()
     {
-        Arrow arrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, Quaternion.identity);
+        Arrow arrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, Quaternion.LookRotation(Player.LookDirection));
         arrow.Init(damage, shootForce * Player.LookDirection);
     }
 }
