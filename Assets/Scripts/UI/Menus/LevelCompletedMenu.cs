@@ -11,6 +11,8 @@ public class LevelCompletedMenu : BaseMenu, IGameFinishListener
     {
         base.Start();
 
+        GameManager.Instance.RegisterListener(this);
+
         nextLevelButton.onClick.AddListener(SceneController.LoadNextScene);
         mainMenuButton.onClick.AddListener(SceneController.LoadMainMenu);
     }
@@ -18,6 +20,7 @@ public class LevelCompletedMenu : BaseMenu, IGameFinishListener
     public void OnGameFinished()
     {
         Show();
+        Cursor.lockState = CursorLockMode.None;
         GameManager.Instance.PauseGame();
     }
 }
