@@ -25,8 +25,6 @@ public class PauseMenu : BaseMenu
         {
             if (!isPaused)
                 Pause();
-            else
-                Resume();
         };
         closeButton.onClick.AddListener(Resume);
 

@@ -12,9 +12,9 @@ public class Spike : InvertableBehaviour
         if (other.CompareTag("Player"))
         {
             if (isInverted)
-                Player.Health.Heal(Damage);
+                Player.Instance.Health.Heal(Damage);
             else
-                Player.Health.Damage(Damage);
+                Player.Instance.Health.Damage(Damage);
             damageCorutin = StartCoroutine(RestartSpike());
         }
     }

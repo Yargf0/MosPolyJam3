@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour,
@@ -16,21 +17,21 @@ public class Player : MonoBehaviour,
 
     private PlayerInput input;
 
-    public static Transform OriginTransform => instance.movement.transform;
-    public static PlayerMovement PlayerMovement => instance.movement;
-    public static Observer<float> FOVMultiplier => instance.movement.FOVMultuplier;
+    public  Transform OriginTransform => movement.transform;
+    public PlayerMovement PlayerMovement => movement;
+    public Observer<float> FOVMultiplier => movement.FOVMultuplier;
 
-    public static HealthSystem Health => instance.healthSystem;
+    public HealthSystem Health => healthSystem;
 
-    public static Vector3 CameraPosition => instance.cam.transform.position;
-    public static Vector3 LookDirection => instance.cam.transform.forward;
+    public Vector3 CameraPosition => cam.transform.position;
+    public Vector3 LookDirection => cam.transform.forward;
 
-    private static Player instance;
+    public static Player Instance;
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (Instance == null)
+            Instance = this;
         else
         {
             Debug.LogError($"[{nameof(Player)}] Multiple instances of type");
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour,
 
         weapon.Init(input);
 
-        healthSystem.Died += SceneController.ReloadScene;
+        healthSystem.Died += () => StartCoroutine(OnDied());;
     }
 
     private void Update()
@@ -73,7 +74,7 @@ public class Player : MonoBehaviour,
 
     public static void AddStar()
     {
-        instance.collectedStarCount++;
+        Instance.collectedStarCount++;
     }
 
     public void OnGamePaused()
@@ -100,5 +101,11 @@ public class Player : MonoBehaviour,
         {
             collectable.Collect();
         }
+    }
+
+    private IEnumerator OnDied()
+    {
+        yield return new WaitForEndOfFrame();
+        SceneController.ReloadScene();
     }
 }

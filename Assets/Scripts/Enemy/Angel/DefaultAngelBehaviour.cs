@@ -31,7 +31,7 @@ public class DefaultAngelBehaviour
         this.bodyRadius = bodyRadius;
 
         this.owner = owner;
-        this.playerTransform = Player.OriginTransform;
+        this.playerTransform = Player.Instance.OriginTransform;
 
         targetPosition = transform.position;
 
@@ -72,7 +72,7 @@ public class DefaultAngelBehaviour
             MoveTo(hangOnPosition, deltaTime);
         }
 
-        transform.rotation = Quaternion.LookRotation(Player.CameraPosition - transform.position);
+        transform.rotation = Quaternion.LookRotation(Player.Instance.CameraPosition - transform.position);
     }
 
     protected virtual void MoveTo(Vector3 position, float deltaTime)
@@ -97,7 +97,7 @@ public class DefaultAngelBehaviour
     {
         Debug.Log("Attack");
         if (Physics.OverlapSphere(attackPosition, config.attackOverlapRadius, config.playerLayerMask) != null)
-            Player.Health.Damage(config.damage);
+            Player.Instance.Health.Damage(config.damage);
     }
 
     protected virtual void CalculateHangOnPosition()
@@ -139,7 +139,7 @@ public class DefaultAngelBehaviour
         attackPreparingTimer.Finished += delegate
         {
             Debug.Log("Cast Attack");
-            attackPosition = Player.CameraPosition;
+            attackPosition = Player.Instance.CameraPosition;
             float attackDuration = randomAttackTime;
 
             Object.Instantiate(config.attackParticle, attackPosition, Quaternion.identity).

@@ -25,7 +25,7 @@ public class HealerMageEnemy : BaseEnemy
 
     protected override void Start()
     {
-        playerTransform = Player.OriginTransform;
+        playerTransform = Player.Instance.OriginTransform;
 
         cooldownTimer = new CountdownTimer();
         castPreparingTimer = new CountdownTimer();
@@ -44,8 +44,8 @@ public class HealerMageEnemy : BaseEnemy
             {
                 if (Physics.CheckSphere(healPosition, healRadius, playerLayerMask))
                 {
-                    if (isInverted) Player.Health.Damage(healValue);
-                    else Player.Health.Heal(healValue);
+                    if (isInverted) Player.Instance.Health.Damage(healValue);
+                    else Player.Instance.Health.Heal(healValue);
                 }
             });
     }
@@ -56,7 +56,7 @@ public class HealerMageEnemy : BaseEnemy
         {
             transform.rotation = Quaternion.LookRotation(playerTransform.DirectionXZ(transform));
 
-            healPosition = Player.CameraPosition;
+            healPosition = Player.Instance.CameraPosition;
 
             cooldownTimer.Play(healCooldown + healCastTime);
             castPreparingTimer.Play(healCastTime);

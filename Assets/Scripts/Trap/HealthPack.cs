@@ -12,11 +12,11 @@ public class HealthPack : InvertableBehaviour, ICollectable
 
         if (isInverted)
         {
-            Player.Health.Damage(damageAmount);
+            Player.Instance.Health.Damage(damageAmount);
         }
         else
         {
-            Player.Health.Heal(healAmount);
+            Player.Instance.Health.Heal(healAmount);
         }
 
         Destroy(gameObject);
@@ -24,7 +24,7 @@ public class HealthPack : InvertableBehaviour, ICollectable
     }
     protected void Update()
     {
-        Vector3 direction = Player.CameraPosition - transform.position;
+        Vector3 direction = Player.Instance.CameraPosition - transform.position;
         direction.y = 0;
         transform.rotation = Quaternion.LookRotation(direction);
     }

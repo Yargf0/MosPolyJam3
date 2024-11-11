@@ -31,7 +31,7 @@ public class PlayerCamera : PlayerModule
 
         input.OnRotate += Rotate;
 
-        Player.FOVMultiplier.ValueChanged += OnFOVMultiplierValueChanged;
+        Player.Instance.FOVMultiplier.ValueChanged += OnFOVMultiplierValueChanged;
     }
 
     private void Start()

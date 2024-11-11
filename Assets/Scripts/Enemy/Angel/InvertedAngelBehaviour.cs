@@ -10,13 +10,13 @@ public class InvertedAngelBehaviour : DefaultAngelBehaviour
     {
         Debug.Log("Attack");
         if (Physics.OverlapSphere(attackPosition, config.attackOverlapRadius, config.playerLayerMask) != null)
-            Player.Health.Heal(config.damage);
+            Player.Instance.Health.Heal(config.damage);
     }
 
     protected override void CalculateTargetPoint()
     {
-        Vector3 playerLookDirection = Player.LookDirection;
-        Vector3 playerCameraPosition = Player.CameraPosition;
+        Vector3 playerLookDirection = Player.Instance.LookDirection;
+        Vector3 playerCameraPosition = Player.Instance.CameraPosition;
 
         if (playerLookDirection.Angle(targetPosition - playerCameraPosition).InRange(config.chaseAngle) &&
             playerCameraPosition.Distance(targetPosition) <= config.offset)

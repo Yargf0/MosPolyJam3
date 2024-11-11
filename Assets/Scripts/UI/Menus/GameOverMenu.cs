@@ -11,7 +11,7 @@ public class GameOverMenu : BaseMenu
     {
         base.Start();
 
-        //Player.Health.Died += OnPlayerDied;
+        Player.Instance.Health.Died += OnPlayerDied;
 
         reloadLevelButton.onClick.AddListener(SceneController.ReloadScene);
         mainMenuButton.onClick.AddListener(SceneController.LoadMainMenu);

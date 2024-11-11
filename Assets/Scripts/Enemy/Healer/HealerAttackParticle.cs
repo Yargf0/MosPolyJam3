@@ -28,6 +28,6 @@ public class HealerAttackParticle : MonoBehaviour
 
     private void Update()
     {
-        transform.rotation = Quaternion.LookRotation(-Player.LookDirection);
+        transform.rotation = Quaternion.LookRotation(-Player.Instance.LookDirection);
     }
 }

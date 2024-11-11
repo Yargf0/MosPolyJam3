@@ -13,9 +13,9 @@ public class SpeedBuster : InvertableBehaviour
         if (other.CompareTag("Player"))
         {
             if (isInverted)
-                Player.PlayerMovement.ChangeSpeedTemporarily(-multiplayer, duration);
+                Player.Instance.PlayerMovement.ChangeSpeedTemporarily(-multiplayer, duration);
             else
-                Player.PlayerMovement.ChangeSpeedTemporarily(multiplayer, duration);
+                Player.Instance.PlayerMovement.ChangeSpeedTemporarily(multiplayer, duration);
 
             StartCoroutine(CooldownRoutine());
         }

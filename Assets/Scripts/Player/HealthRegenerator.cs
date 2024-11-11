@@ -35,12 +35,12 @@ public class HealthRegenerator : InvertableBehaviour
 
         while (elapsedTime < duration)
         {
-            if (!isPaused && Player.Health.IsAlive)
+            if (!isPaused && Player.Instance.Health.IsAlive)
             {
                 if (isInverted)
-                    Player.Health.Damage(healthChangeAmount);
+                    Player.Instance.Health.Damage(healthChangeAmount);
                 else
-                    Player.Health.Heal(healthChangeAmount);
+                    Player.Instance.Health.Heal(healthChangeAmount);
             }
 
             elapsedTime += 1f;

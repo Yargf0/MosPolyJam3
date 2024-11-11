@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fall : MonoBehaviour
@@ -9,7 +7,7 @@ public class Fall : MonoBehaviour
     {
         if (transform.position.y <= yPostionTester)
         {
-            Player.Health.Damage(Player.Health.MaxHealth);
+            Player.Instance.Health.Damage(Player.Instance.Health.MaxHealth);
         }
     }
 }

@@ -10,11 +10,15 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
             {
                 instance = new GameObject().AddComponent<T>();
                 instance.name = instance.GetType().Name;
-
                 instance.Init();
             }
 
             return instance;
+        }
+
+        protected set
+        {
+            instance = value;
         }
     }
 
