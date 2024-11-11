@@ -3,10 +3,12 @@
 public class InvertedAngelBehaviour : DefaultAngelBehaviour
 {
     public InvertedAngelBehaviour(AngelEnemy owner, AngelEnemyConfig config, float bodyRadius) :
-        base(owner, config, bodyRadius) { }
+        base(owner, config, bodyRadius)
+    { }
 
     protected override void Attack()
     {
+        Debug.Log("Attack");
         if (Physics.OverlapSphere(attackPosition, config.attackOverlapRadius, config.playerLayerMask) != null)
             Player.Health.Heal(config.damage);
     }

@@ -1,6 +1,6 @@
 using DG.Tweening;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DesapiaringIsland : MonoBehaviour
@@ -21,7 +21,7 @@ public class DesapiaringIsland : MonoBehaviour
             float randomTime = Random.Range(minTime, maxTime);
 
             yield return new WaitForSeconds(randomTime);
-            foreach (Material m in materialList) 
+            foreach (Material m in materialList)
             {
                 m.DOFade(0, 1f).SetEase(Ease.InBounce).Play();
             }

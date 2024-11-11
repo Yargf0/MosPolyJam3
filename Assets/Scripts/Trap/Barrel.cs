@@ -35,24 +35,24 @@ public class Barrel : InvertableBehaviour, IDamagable
 
     protected override void OnInverted()
     {
-        
+
     }
 
-    
+
     private void PlayParticlesNormally()
     {
-        StopAllCoroutines(); 
-        particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear); 
-        particleSystem.Play(true); 
+        StopAllCoroutines();
+        particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        particleSystem.Play(true);
     }
 
     private void StartInverseParticleCoroutine()
     {
-        StopAllCoroutines(); 
+        StopAllCoroutines();
         StartCoroutine(InverseParticle());
     }
 
-    
+
     IEnumerator InverseParticle()
     {
         // Полностью останавливаем систему, чтобы можно было сменить AutoRandomSeed

@@ -11,7 +11,8 @@ public class HealerAttackParticle : MonoBehaviour
         transform.
             DOMove(endPosition, duration).
             SetEase(Ease.InCubic).
-            OnComplete(delegate {
+            OnComplete(delegate
+            {
                 onComplete?.Invoke();
                 Destroy(gameObject);
             }).

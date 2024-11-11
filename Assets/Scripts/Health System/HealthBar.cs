@@ -44,10 +44,8 @@ public class HealthBar : BaseInvertableUIElement
         tween = fillImage.
             DOFillAmount(fillAmount, tweenOptions.Duration).
             SetEase(tweenOptions.Ease).
-            OnComplete(() => gameObject.SetActive(fillAmount <= 0f)).
+            OnComplete(() => gameObject.SetActive(isInverted ? fillAmount < 1f : fillAmount > 0f)).
             Play();
-
-        Debug.Log("Start");
     }
 
     private void OnHealthChanged(float remainingHealth)

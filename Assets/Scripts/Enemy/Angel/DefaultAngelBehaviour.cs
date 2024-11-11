@@ -95,6 +95,7 @@ public class DefaultAngelBehaviour
 
     protected virtual void Attack()
     {
+        Debug.Log("Attack");
         if (Physics.OverlapSphere(attackPosition, config.attackOverlapRadius, config.playerLayerMask) != null)
             Player.Health.Damage(config.damage);
     }
@@ -138,13 +139,13 @@ public class DefaultAngelBehaviour
         attackPreparingTimer.Finished += delegate
         {
             Debug.Log("Cast Attack");
-            attackPosition = playerTransform.position;
+            attackPosition = Player.CameraPosition;
             float attackDuration = randomAttackTime;
 
             Object.Instantiate(config.attackParticle, attackPosition, Quaternion.identity).
                 Init(attackDuration, config.attackParticleColor).Play();
 
-            attackTimer.Play();
+            attackTimer.Play(attackDuration);
         };
         attackTimer.Finished += Attack;
     }

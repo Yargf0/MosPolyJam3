@@ -20,7 +20,7 @@ public class AudioManager : Singleton<AudioManager>
 
         MuteMusic.ValueChanged += (pV, nV) => musicAudioSource.mute = nV;
         MusicVolume.ValueChanged += (pV, nV) => musicAudioSource.volume = nV * 0.5f;
-        
+
         MuteSound.ValueChanged += (pV, nV) => soundAudioSource.mute = nV;
         SoundVolume.ValueChanged += (pV, nV) => soundAudioSource.volume = nV * 0.5f;
 

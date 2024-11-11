@@ -27,6 +27,7 @@ public abstract class InvertableBehaviour : MonoBehaviour
         if (invert == isInverted)
             return;
 
+        isInverted = invert;
         OnInverted();
     }
 

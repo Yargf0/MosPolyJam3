@@ -29,8 +29,10 @@ public class AngelAttackParticle : MonoBehaviour
         if (timer.IsPlaying)
             timer.Stop();
 
-        timer.OnFinished(delegate {
-            timer.OnFinished(delegate {
+        timer.OnFinished(delegate
+        {
+            timer.OnFinished(delegate
+            {
                 Destroy(gameObject);
             });
 

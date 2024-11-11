@@ -60,7 +60,7 @@ public class PlayerInput
         if (rotationVector != Vector2.zero)
             OnRotate?.Invoke(rotationVector);
 
-        int scrollDelta = (int) inputActions.Player.ScrollDelta.ReadValue<float>();
+        int scrollDelta = (int)inputActions.Player.ScrollDelta.ReadValue<float>();
         if (scrollDelta != 0)
             OnScroll?.Invoke(scrollDelta);
     }

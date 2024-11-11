@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour,
@@ -14,7 +13,7 @@ public class Player : MonoBehaviour,
     [SerializeField] private float maxHealth = 100f;
 
     private int collectedStarCount;
-    
+
     private PlayerInput input;
 
     public static Transform OriginTransform => instance.movement.transform;
@@ -92,7 +91,7 @@ public class Player : MonoBehaviour,
             collectable.Collect();
         }
     }
-    
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out ICollectable collectable))

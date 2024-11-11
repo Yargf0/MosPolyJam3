@@ -4,14 +4,14 @@ using UnityEngine;
 public class HealthPack : InvertableBehaviour, ICollectable
 {
     [Header("Health Pack Settings")]
-    public float healAmount = 20f;   
+    public float healAmount = 20f;
     public float damageAmount = 10f;
 
     public void Collect()
     {
 
         if (isInverted)
-        {         
+        {
             Player.Health.Damage(damageAmount);
         }
         else
@@ -20,7 +20,7 @@ public class HealthPack : InvertableBehaviour, ICollectable
         }
 
         Destroy(gameObject);
-        
+
     }
     protected void Update()
     {

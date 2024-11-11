@@ -29,7 +29,7 @@ public class PlayerMovement : PlayerModule
     [SerializeField] private float crouchYScale = 0.5f;
     [Space(10)]
     [SerializeField] private Transform colliderTransform;
-    
+
     [Header("FBX References")]
     [SerializeField] private Transform fbxRootTransform;
 
@@ -130,7 +130,7 @@ public class PlayerMovement : PlayerModule
 
         if (isRunning)
         {
-            currentSpeed = runSpeed* speedMultiplayer;
+            currentSpeed = runSpeed * speedMultiplayer;
             state = PlayerMovementState.Run;
 
             FOVMultuplier.Value = runFovMultiplier;
@@ -153,7 +153,11 @@ public class PlayerMovement : PlayerModule
             force.z *= airVelocityMultiplier;
         }
         else
-            force.y -= 2f;
+        {
+
+
+            force.y -= 4f;
+        }
 
         rb.AddForce(force);
     }
@@ -183,6 +187,9 @@ public class PlayerMovement : PlayerModule
     {
         bool isGroundedCurrentFrame = Physics.CheckSphere(transform.position, groundCheckRadius, groundLayerMask);
 
+        if (isGrounded == isGroundedCurrentFrame)
+            return;
+
         if (isGroundedCurrentFrame && !isGrounded)
         {
             rb.drag = onGroundDrag;
@@ -195,6 +202,7 @@ public class PlayerMovement : PlayerModule
         }
 
         isGrounded = isGroundedCurrentFrame;
+        Debug.Log("Grounded Changed: " + isGrounded);
     }
 
     public void ChangeSpeedTemporarily(float changeSpeedMultiplayer, float duration)

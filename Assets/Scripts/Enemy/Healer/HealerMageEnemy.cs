@@ -26,7 +26,7 @@ public class HealerMageEnemy : BaseEnemy
     protected override void Start()
     {
         playerTransform = Player.OriginTransform;
-     
+
         cooldownTimer = new CountdownTimer();
         castPreparingTimer = new CountdownTimer();
 
@@ -40,7 +40,8 @@ public class HealerMageEnemy : BaseEnemy
         float duration = (projectileSpawnPoint.position.Distance(healPosition) / moveSpeed) * Time.deltaTime;
         Instantiate(healParticlePrefab, projectileSpawnPoint.position, Quaternion.identity).
             Init(duration, healPosition).
-            OnComplete(delegate {
+            OnComplete(delegate
+            {
                 if (Physics.CheckSphere(healPosition, healRadius, playerLayerMask))
                 {
                     if (isInverted) Player.Health.Damage(healValue);
@@ -55,7 +56,7 @@ public class HealerMageEnemy : BaseEnemy
         {
             transform.rotation = Quaternion.LookRotation(playerTransform.DirectionXZ(transform));
 
-            healPosition = playerTransform.position;
+            healPosition = Player.CameraPosition;
 
             cooldownTimer.Play(healCooldown + healCastTime);
             castPreparingTimer.Play(healCastTime);

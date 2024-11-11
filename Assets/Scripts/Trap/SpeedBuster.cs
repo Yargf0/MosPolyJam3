@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpeedBuster : InvertableBehaviour
@@ -11,9 +10,9 @@ public class SpeedBuster : InvertableBehaviour
     {
         if (isOnCooldown)
             return;
-        if (other.CompareTag("Player") )
+        if (other.CompareTag("Player"))
         {
-            if(isInverted)
+            if (isInverted)
                 Player.PlayerMovement.ChangeSpeedTemporarily(-multiplayer, duration);
             else
                 Player.PlayerMovement.ChangeSpeedTemporarily(multiplayer, duration);
@@ -23,14 +22,14 @@ public class SpeedBuster : InvertableBehaviour
     }
     protected override void OnInverted()
     {
-        
+
     }
 
     private IEnumerator CooldownRoutine()
     {
         isOnCooldown = true;
         GetComponent<Collider>().enabled = false;
-        yield return new WaitForSeconds(duration); 
+        yield return new WaitForSeconds(duration);
         isOnCooldown = false;
         GetComponent<Collider>().enabled = true;
     }

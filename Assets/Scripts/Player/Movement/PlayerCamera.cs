@@ -44,7 +44,7 @@ public class PlayerCamera : PlayerModule
     {
         Move();
     }
-    
+
     private void Move()
     {
         transform.position = followTransform.position;

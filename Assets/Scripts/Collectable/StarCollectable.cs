@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class StarCollectable : BaseCollectable
+﻿public class StarCollectable : BaseCollectable
 {
     public override void Collect()
     {

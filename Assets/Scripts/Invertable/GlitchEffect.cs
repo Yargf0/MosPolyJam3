@@ -13,7 +13,7 @@ public class GlitchEffect : MonoBehaviour
         spriteRenderer.flipX = randomBool;
         spriteRenderer.flipY = randomBool;
     }
-    
+
     public void SetActive(bool isActive)
     {
         gameObject.SetActive(isActive);

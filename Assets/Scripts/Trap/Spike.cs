@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Spike : InvertableBehaviour
@@ -22,7 +21,7 @@ public class Spike : InvertableBehaviour
 
     private IEnumerator RestartSpike()
     {
-        GetComponent<Collider>().enabled = false;    
+        GetComponent<Collider>().enabled = false;
         yield return new WaitForSeconds(DamageInterval);
         GetComponent<Collider>().enabled = true;
     }
