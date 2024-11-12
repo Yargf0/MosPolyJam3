@@ -115,8 +115,54 @@ Transform:
   - {fileID: 1271858495906363797}
   - {fileID: 644123794476327405}
   - {fileID: 8865415303416450886}
+  - {fileID: 7722947488107891082}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &3548364209731952261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7722947488107891082}
+  - component: {fileID: 4331767387252042412}
+  m_Layer: 7
+  m_Name: Play Music On Awake
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7722947488107891082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548364209731952261}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6866692843380981652}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4331767387252042412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548364209731952261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7782c72784ee5f44f9b00d24670f2c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 8300000, guid: 3769ceea7a2935b4096171f0585c34a7, type: 3}
 --- !u!1 &4476943021046142312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +1101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 676250729891887050, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
       propertyPath: m_Size
-      value: 0.5050505
+      value: 0.60240966
       objectReference: {fileID: 0}
     - target: {fileID: 877131168451114585, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
       propertyPath: m_IsActive
