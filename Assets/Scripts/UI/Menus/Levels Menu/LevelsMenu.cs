@@ -6,7 +6,6 @@ public class LevelsMenu : BaseMenu
     [Header("Level Buttons")]
     [SerializeField] private Transform buttonsContainer;
     [SerializeField] private LevelButton buttonPrefab;
-    [SerializeField] private int levelsCount;
 
     private List<LevelButton> buttons;
 
@@ -22,12 +21,13 @@ public class LevelsMenu : BaseMenu
         if (buttons != null)
             DestroyButtons();
 
-        buttons = new List<LevelButton>(levelsCount);
+        List<LevelData> levelDatas = LevelsManager.Instance.LevelDatas;
+        buttons = new List<LevelButton>(levelDatas.Count);
 
-        for (int i = 1; i <= levelsCount; i++)
+        for (int i = 0; i < levelDatas.Count; i++)
         {
             LevelButton button = Instantiate(buttonPrefab, buttonsContainer);
-            button.SetData(i, 3);
+            button.SetData(levelDatas[i]);
             buttons.Add(button);
         }
     }

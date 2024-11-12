@@ -23,17 +23,18 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     }
 
     private static T instance;
+    protected bool initialized;
 
     protected virtual void Awake()
     {
         if (instance == null)
         {
             instance = (T)this;
-            Init();
+            if (!initialized) Init();
         }
         else
             Debug.LogError($"[{nameof(Singleton<T>)}] Created two or more objects of type: {GetType().Name}");
     }
 
-    protected virtual void Init() { }
+    protected virtual void Init() { initialized = true; }
 }

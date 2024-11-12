@@ -32,7 +32,6 @@ public static class SceneController
 
     public static void LoadScene(int buildIndex)
     {
-        DOTween.KillAll();
         DOTween.Clear();
         SceneManager.LoadScene(buildIndex);
     }

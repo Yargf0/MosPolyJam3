@@ -16,6 +16,8 @@ public class AudioManager : Singleton<AudioManager>
 
     protected override void Init()
     {
+        initialized = true;
+
         CreateAudioSources();
 
         MuteMusic.ValueChanged += (pV, nV) => musicAudioSource.mute = nV;

@@ -110,4 +110,9 @@ public class Player : MonoBehaviour,
         yield return new WaitForEndOfFrame();
         SceneController.ReloadScene();
     }
+
+    private void OnDestroy()
+    {
+        LevelsManager.Instance.SetStars(collectedStarCount);
+    }
 }
