@@ -125,3 +125,4 @@ MonoBehaviour:
   glitchScale: 1
   multiplayer: 0.4
   duration: 5
+  activatedAudio: {fileID: 8300000, guid: 994948cdc7e736447a54fc504d747c39, type: 3}

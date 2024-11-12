@@ -20,8 +20,8 @@ public class Sword : BaseWeapon
         if (cooldownTimer.IsPlaying)
             return;
 
-        sequence?.Kill();
-        sequence = DOTween.Sequence().
+        AudioManager.Instance.PlaySound(attackAudio, Random.Range(0.9f, 1.1f));
+        DOTween.Sequence().
             Append(handGripTransform.
                 DOLocalRotate(new Vector3(90f, -90f, -40f), tweenOptions.Duration).
                 SetEase(tweenOptions.Ease).

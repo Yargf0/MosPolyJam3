@@ -141,6 +141,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   cooldown: 2
+  attackAudio: {fileID: 8300000, guid: 17604574bf454984fb7b862cd7e910a4, type: 3}
   arrowPrefab: {fileID: 7015478320527066862, guid: d66621a95048349409f59181dc9680a7, type: 3}
   arrowSpawnPoint: {fileID: 5179841071891740664}
   shootForce: 50

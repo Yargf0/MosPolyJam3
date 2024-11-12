@@ -7,6 +7,9 @@ public class LevelCompletedMenu : BaseMenu, IGameFinishListener
     [SerializeField] private Button nextLevelButton;
     [SerializeField] private Button mainMenuButton;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip levelCompletedAudio;
+
     protected override void Start()
     {
         base.Start();
@@ -20,6 +23,7 @@ public class LevelCompletedMenu : BaseMenu, IGameFinishListener
     public void OnGameFinished()
     {
         Show();
+        AudioManager.Instance.PlaySound(levelCompletedAudio, Random.Range(0.9f, 1.1f));
         Cursor.lockState = CursorLockMode.None;
         GameManager.Instance.PauseGame();
     }

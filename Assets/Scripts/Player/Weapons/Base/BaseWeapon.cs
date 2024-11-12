@@ -7,15 +7,29 @@ public abstract class BaseWeapon : PlayerModule
     [SerializeField] protected LayerMask enemyLayerMask;
     [SerializeField] protected float cooldown = 2f;
 
+    [Header("Audio")]
+    [SerializeField] protected AudioClip attackAudio;
+
     protected CountdownTimer cooldownTimer;
 
     public override void Init(PlayerInput input)
     {
         base.Init(input);
 
-        input.OnAttack += Animate;
 
         cooldownTimer = new CountdownTimer();
+    }
+
+    public virtual void Enable()
+    {
+        input.OnAttack += Animate;
+        gameObject.SetActive(true);
+    }
+
+    public virtual void Disable()
+    {
+        input.OnAttack -= Animate;
+        gameObject.SetActive(false);
     }
 
     protected abstract void Animate();

@@ -14,6 +14,7 @@ public class Ruin : InvertableBehaviour
     public GameObject MeshPlatform;
 
     [SerializeField] private TweenOptions tweenOptions = new(1f, Ease.OutCubic);
+    [SerializeField] private AudioClip fallAudio;
 
     private float initialPositionY;
 
@@ -32,7 +33,6 @@ public class Ruin : InvertableBehaviour
             MeshPlatform.transform.position = MeshPlatform.transform.position - Vector3.up * fallDistance;
             initialPosition = transform.position;
             MeshPlatform.SetActive(false);
-
         }
 
     }
@@ -55,7 +55,11 @@ public class Ruin : InvertableBehaviour
                 DOMoveY(endPosY, tweenOptions.Duration).
                 SetEase(tweenOptions.Ease).
                 SetDelay(delay).
-                OnStart(() => platformCollider.enabled = isInverted).
+                OnStart(delegate
+                {
+                    platformCollider.enabled = isInverted;
+                    if (!isInverted) AudioManager.Instance.PlaySound(fallAudio, Random.Range(0.9f, 1.1f));
+                }).
                 OnComplete(delegate
                 {
                     isMoving = false;
@@ -76,6 +80,7 @@ public class Ruin : InvertableBehaviour
         if (other.collider.CompareTag("Player"))
         {
             float endPosY = isInverted ? initialPositionY - fallDistance : initialPositionY;
+            if (isInverted) AudioManager.Instance.PlaySound(fallAudio, Random.Range(0.9f, 1.1f));
 
             tween?.Kill();
             tween = MeshPlatform.transform.

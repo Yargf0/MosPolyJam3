@@ -28,6 +28,7 @@ public abstract class InvertableBehaviour : MonoBehaviour
             return;
 
         isInverted = invert;
+        glitchEffectInstance?.SetActive(invert);
         OnInverted();
     }
 

@@ -149,6 +149,7 @@ MonoBehaviour:
   glitchEffectPrefab: {fileID: 7164203603004675310, guid: 7a39e9a911ddcaa48a25897270b58aa4, type: 3}
   glitchScale: 0.16
   maxHealth: 10
+  dieAudio: {fileID: 8300000, guid: ab99bcedf52e5e045b1e5e1445668fcf, type: 3}
   defaultBehaviourConfig: {fileID: 11400000, guid: cf7929d018e8d0f4188569971174fefa, type: 2}
   invertedBehaviourConfig: {fileID: 11400000, guid: bdf123972c3f89247b8ad48909315655, type: 2}
 --- !u!135 &37026822788267703

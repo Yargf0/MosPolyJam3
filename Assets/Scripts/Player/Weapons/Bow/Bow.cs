@@ -22,6 +22,7 @@ public class Bow : BaseWeapon
 
     protected override void Attack()
     {
+        AudioManager.Instance.PlaySound(attackAudio, Random.Range(0.9f, 1.1f));
         Arrow arrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, Quaternion.LookRotation(Player.Instance.LookDirection));
         arrow.Init(damage, shootForce * Player.Instance.LookDirection);
     }

@@ -6,6 +6,9 @@ public class SpeedBuster : InvertableBehaviour
     public float multiplayer = 0.3f;
     public float duration = 5f;
     private bool isOnCooldown = false;
+
+    [SerializeField] private AudioClip activatedAudio;
+
     private void OnTriggerEnter(Collider other)
     {
         if (isOnCooldown)
@@ -17,6 +20,7 @@ public class SpeedBuster : InvertableBehaviour
             else
                 Player.Instance.PlayerMovement.ChangeSpeedTemporarily(multiplayer, duration);
 
+            AudioManager.Instance.PlaySound(activatedAudio, Random.Range(0.9f, 1.1f));
             StartCoroutine(CooldownRoutine());
         }
     }

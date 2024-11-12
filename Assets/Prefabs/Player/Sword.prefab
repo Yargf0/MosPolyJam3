@@ -161,12 +161,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  attackPoint: {fileID: 7887254995054796658}
-  attackRadius: 0.7
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  attackCooldown: 2
+  cooldown: 2
+  attackAudio: {fileID: 8300000, guid: cf2cac2c32842b24b8c2df9a15d397b4, type: 3}
+  attackPoint: {fileID: 7887254995054796658}
+  attackRadius: 0.7
   handGripTransform: {fileID: 5265964110103034399}
   tweenOptions:
     Duration: 0.5

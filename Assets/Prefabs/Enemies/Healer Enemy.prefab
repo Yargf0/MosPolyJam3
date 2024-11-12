@@ -65,6 +65,9 @@ MonoBehaviour:
   glitchEffectPrefab: {fileID: 0}
   glitchScale: 1
   maxHealth: 15
+  dieAudio: {fileID: 8300000, guid: ab99bcedf52e5e045b1e5e1445668fcf, type: 3}
+  attackPreparingAudio: {fileID: 8300000, guid: 3a45e792cde50b84db1386fed8a0965a, type: 3}
+  attackAudio: {fileID: 8300000, guid: 3f23a32d9ebbe314f80b04c312c0edfd, type: 3}
   healValue: 20
   healRadius: 15
   healCooldown: 5

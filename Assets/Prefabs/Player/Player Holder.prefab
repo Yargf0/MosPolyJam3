@@ -459,6 +459,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheckRadius: 0.1
+  footstepAudio: {fileID: 8300000, guid: e6c71abf7967eba4bb12bb696e55dff3, type: 3}
+  jumpAudio: {fileID: 8300000, guid: 5cbf64269c45ea344a58a6d4f9be1e4a, type: 3}
   currentSpeed: 0
   speedMultiplayer: 1
   rb: {fileID: 0}
@@ -507,6 +509,8 @@ MonoBehaviour:
   weapon: {fileID: 8732523371908936076}
   secondWeapon: {fileID: 7414863770726681946}
   maxHealth: 100
+  dieAudio: {fileID: 8300000, guid: 1707ddc2f8ed2ed46887f1e6b9447447, type: 3}
+  damagedAudio: {fileID: 8300000, guid: 59b65c89d0d40194eb7d3d6ea417f428, type: 3}
 --- !u!114 &6464070213092968251
 MonoBehaviour:
   m_ObjectHideFlags: 0

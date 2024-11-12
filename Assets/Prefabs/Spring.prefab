@@ -54,6 +54,7 @@ MonoBehaviour:
   verticalForce: 30
   sideForce: 5
   animator: {fileID: 7379784741164603310}
+  activatedAudio: {fileID: 8300000, guid: 926fd7a7cd74f844faea1ada10709a8e, type: 3}
 --- !u!65 &7939298005461715266
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public static class SceneController
 
     public static void LoadMainMenu()
     {
-        LoadScene(1);
+        LoadScene(0);
     }
 
     public static void ReloadScene()

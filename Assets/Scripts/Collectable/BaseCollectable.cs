@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class BaseCollectable : MonoBehaviour, ICollectable
+public abstract class BaseCollectable : InvertableBehaviour, ICollectable
 {
     protected virtual void Update()
     {

@@ -102,6 +102,7 @@ MonoBehaviour:
   glitchScale: 1
   DamageInterval: 3
   Damage: 20
+  hitAudio: {fileID: 8300000, guid: 172b6d324ae5e7344bca1946ce86ba33, type: 3}
 --- !u!65 &6515903324563757273
 BoxCollider:
   m_ObjectHideFlags: 0

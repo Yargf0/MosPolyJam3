@@ -12,7 +12,11 @@ public class Player : MonoBehaviour,
     [SerializeField] private BaseWeapon secondWeapon;
 
     [Header("Stats")]
-    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float maxHealth = 30f;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip dieAudio;
+    [SerializeField] private AudioClip damagedAudio;
 
     private int collectedStarCount;
 
@@ -63,6 +67,7 @@ public class Player : MonoBehaviour,
         weapon.Init(input);
         secondWeapon.Init(input);
 
+        healthSystem.HealthChanged += (health) => AudioManager.Instance.PlaySound(damagedAudio, Random.Range(0.9f, 1.1f));
         healthSystem.Died += () => StartCoroutine(OnDied());;
     }
 
@@ -79,6 +84,12 @@ public class Player : MonoBehaviour,
     public static void AddStar()
     {
         Instance.collectedStarCount++;
+    }
+
+    public static void RemoveStar()
+    {
+        if (Instance.collectedStarCount > 0)
+            Instance.collectedStarCount--;
     }
 
     public void OnGamePaused()
@@ -109,6 +120,7 @@ public class Player : MonoBehaviour,
 
     private IEnumerator OnDied()
     {
+        AudioManager.Instance.PlaySound(dieAudio, Random.Range(0.9f, 1.1f));
         yield return new WaitForEndOfFrame();
         SceneController.ReloadScene();
     }

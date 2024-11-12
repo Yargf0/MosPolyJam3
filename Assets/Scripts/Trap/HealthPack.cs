@@ -7,6 +7,8 @@ public class HealthPack : InvertableBehaviour, ICollectable
     public float healAmount = 20f;
     public float damageAmount = 10f;
 
+    [SerializeField] private AudioClip collectedAudio;
+
     public void Collect()
     {
 
@@ -18,6 +20,8 @@ public class HealthPack : InvertableBehaviour, ICollectable
         {
             Player.Instance.Health.Heal(healAmount);
         }
+
+        AudioManager.Instance.PlaySound(collectedAudio, Random.Range(0.9f, 1.1f));
 
         Destroy(gameObject);
 

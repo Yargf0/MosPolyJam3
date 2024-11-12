@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class HealerMageEnemy : BaseEnemy
 {
+    [SerializeField] private AudioClip attackPreparingAudio;
+    [SerializeField] private AudioClip attackAudio;
+
     [Header("Heal Settings")]
     [SerializeField] private float healValue = 1f;
     [SerializeField] private float healRadius = 10f;
@@ -37,6 +40,7 @@ public class HealerMageEnemy : BaseEnemy
 
     private void CastHeal()
     {
+        AudioManager.Instance.PlaySound(attackAudio, Random.Range(0.9f, 1.1f));
         float duration = (projectileSpawnPoint.position.Distance(healPosition) / moveSpeed) * Time.deltaTime;
         Instantiate(healParticlePrefab, projectileSpawnPoint.position, Quaternion.identity).
             Init(duration, healPosition).
@@ -60,6 +64,8 @@ public class HealerMageEnemy : BaseEnemy
 
             cooldownTimer.Play(healCooldown + healCastTime);
             castPreparingTimer.Play(healCastTime);
+
+            AudioManager.Instance.PlaySound(attackPreparingAudio, Random.Range(0.9f, 1.1f));
         }
     }
 

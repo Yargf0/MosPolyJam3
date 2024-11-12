@@ -44,6 +44,8 @@ public class LevelsManager : Singleton<LevelsManager>
 
     private void SaveData()
     {
+        if (LevelDatas != null) return;
+
         for (int i = 0; i < LevelDatas.Count; i++)
         {
             SaveSystem.SetInt($"{i}_sc", LevelDatas[i].starsCollected);

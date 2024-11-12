@@ -6,6 +6,9 @@ public abstract class BaseEnemy : InvertableBehaviour
     [Header("Health")]
     [SerializeField] private float maxHealth = 10f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip dieAudio;
+
     public HealthSystem HealthSystem { get; protected set; }
 
     protected virtual void Awake()
@@ -18,6 +21,8 @@ public abstract class BaseEnemy : InvertableBehaviour
 
     protected virtual void OnDied()
     {
+        AudioManager.Instance.PlaySound(dieAudio, Random.Range(0.9f, 1.1f));
+        Player.AddStar();
         Destroy(gameObject);
     }
 }

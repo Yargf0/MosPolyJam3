@@ -42,6 +42,12 @@ public class PlayerMovement : PlayerModule
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private float groundCheckRadius = 0.1f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip footstepAudio;
+    [SerializeField] private AudioClip jumpAudio;
+
+    private CountdownTimer footstepTimer;
+
     public float currentSpeed;
     public float speedMultiplayer = 1f;
 
@@ -70,6 +76,13 @@ public class PlayerMovement : PlayerModule
         input.OnCrouch += Crouch;
 
         input.OnJump += Jump;
+
+        footstepTimer = new CountdownTimer();
+        footstepTimer.OnFinished(delegate
+        {
+            if (isGrounded && rb.velocity != Vector3.zero)
+                AudioManager.Instance.PlaySound(footstepAudio, Random.Range(0.9f, 1.1f));
+        });
     }
 
     public override void Init(PlayerInput input)
@@ -167,6 +180,8 @@ public class PlayerMovement : PlayerModule
         {
             Vector3 parallelVector = Vector3.Cross(hitInfo.normal, Vector3.Cross(force, hitInfo.normal)).normalized;
             force = currentSpeed * parallelVector;
+
+            footstepTimer.Play(10f / currentSpeed);
         }
 
         rb.AddForce(force);
@@ -178,6 +193,7 @@ public class PlayerMovement : PlayerModule
             return;
 
         rb.AddForce(jumpForce * transform.up, ForceMode.Impulse);
+        AudioManager.Instance.PlaySound(jumpAudio, Random.Range(0.9f, 1.1f));
 
         readyToJump = false;
         Invoke(nameof(ResetJump), jumpCooldown);

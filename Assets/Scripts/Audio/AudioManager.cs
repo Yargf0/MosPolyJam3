@@ -16,6 +16,7 @@ public class AudioManager : Singleton<AudioManager>
 
     protected override void Init()
     {
+        if (initialized) return;
         initialized = true;
 
         CreateAudioSources();

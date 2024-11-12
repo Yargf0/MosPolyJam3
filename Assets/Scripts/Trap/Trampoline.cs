@@ -7,8 +7,9 @@ public class Trampoline : InvertableBehaviour
     public float verticalForce = 10f;
     public float sideForce = 5f;
     [SerializeField] private Animator animator;
-    private readonly int AnimationHash = Animator.StringToHash("activated");
+    [SerializeField] private AudioClip activatedAudio;
 
+    private readonly int AnimationHash = Animator.StringToHash("activated");
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,6 +22,8 @@ public class Trampoline : InvertableBehaviour
     private IEnumerator LaunchPlayer()
     {
         animator.Play(AnimationHash);
+        AudioManager.Instance.PlaySound(activatedAudio, Random.Range(0.9f, 1.1f));
+
         Vector3 launchVelocity = Vector3.up * verticalForce;
 
         if (isInverted)

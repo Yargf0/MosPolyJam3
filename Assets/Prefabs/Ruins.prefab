@@ -140,6 +140,7 @@ MonoBehaviour:
   tweenOptions:
     Duration: 1
     Ease: 9
+  fallAudio: {fileID: 8300000, guid: eb408af93802178428f039b90173f144, type: 3}
 --- !u!64 &6893528339483831839
 MeshCollider:
   m_ObjectHideFlags: 0

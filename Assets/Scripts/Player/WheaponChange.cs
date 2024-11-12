@@ -41,7 +41,10 @@ public class WheaponChange : MonoBehaviour
         // Отключаем все оружия
         for (int i = 0; i < weapons.Length; i++)
         {
-            weapons[i].gameObject.SetActive(i == weaponIndex);
+            if (i == currentWeaponIndex)
+                weapons[i].Enable();
+            else
+                weapons[i].Disable();
         }
     }
 

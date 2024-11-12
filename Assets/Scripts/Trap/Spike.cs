@@ -5,7 +5,8 @@ public class Spike : InvertableBehaviour
 {
     public float DamageInterval = 3.0f;
     public float Damage = 20f;
-    private Coroutine damageCorutin;
+    private Coroutine damageCoroutine;
+    [SerializeField] private AudioClip hitAudio;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,7 +16,8 @@ public class Spike : InvertableBehaviour
                 Player.Instance.Health.Heal(Damage);
             else
                 Player.Instance.Health.Damage(Damage);
-            damageCorutin = StartCoroutine(RestartSpike());
+            damageCoroutine = StartCoroutine(RestartSpike());
+            AudioManager.Instance.PlaySound(hitAudio, Random.Range(0.9f, 1.1f));
         }
     }
 
