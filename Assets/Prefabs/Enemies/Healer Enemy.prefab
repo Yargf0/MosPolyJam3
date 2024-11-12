@@ -90,7 +90,7 @@ MonoBehaviour:
     m_Bits: 128
   projectileSpawnPoint: {fileID: 613722522133555302}
   healParticlePrefab: {fileID: 851787304454013999, guid: e27dcb04b52c6384b8c510872cebc8ee, type: 3}
-  moveSpeed: 0.01
+  moveSpeed: 0.1
 --- !u!136 &8227051828912510615
 CapsuleCollider:
   m_ObjectHideFlags: 0
