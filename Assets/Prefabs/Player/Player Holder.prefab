@@ -107,12 +107,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followTransform: {fileID: 5510089697968391989}
   sensetivity: {x: 800, y: 800}
+  sensetivityMultiplayer: 40
   minHorizontalAngle: -90
   maxHorizontalAngle: 90
   orientationTransform: {fileID: 4748867115590300125}
   fovTweenOptions:
     Duration: 0.5
     Ease: 10
+  rb: {fileID: 0}
+  minFOV: 50
+  maxFOV: 135
+  walkSpeed: 5.71
+  runSpeed: 9
+  walkFOV: 60
+  runFOV: 90
+  transitionSpeed: 5
 --- !u!1 &1928872576261676586
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,6 +302,7 @@ MonoBehaviour:
   movement: {fileID: 5236779893731065335}
   healthSystem: {fileID: 479027075964764390}
   weapon: {fileID: 0}
+  secondWeapon: {fileID: 0}
   maxHealth: 100
 --- !u!114 &5236779893731065335
 MonoBehaviour:
@@ -311,8 +321,8 @@ MonoBehaviour:
   inAirDrag: 0
   onGroundDrag: 7
   airVelocityMultiplier: 0.01
+  airVelocityMultiplierOnSpring: 1
   runSpeed: 70
-  runFovMultiplier: 1.5
   crouchSpeed: 15
   crouchYScale: 0.5
   colliderTransform: {fileID: 1727696184272292655}
@@ -323,6 +333,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheckRadius: 0.1
+  currentSpeed: 0
+  speedMultiplayer: 1
+  rb: {fileID: 0}
 --- !u!54 &7681776449769689871
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -551,6 +564,18 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2334493790055185287, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2334493790055185287, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2334493790055185287, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3056363328324704291, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -607,10 +632,34 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5314069229749607407, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314069229749607407, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5316165173907137078, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
       propertyPath: healthSystem
       value: 
       objectReference: {fileID: 479027075964764390}
+    - target: {fileID: 5705199277569066470, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705199277569066470, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705199277569066470, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705199277569066470, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6094878267227852911, guid: 2d3c012a5d831d444ae3a6bcddebd223, type: 3}
       propertyPath: m_Name
       value: GameUI

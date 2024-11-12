@@ -23,7 +23,7 @@ public class Sword : BaseWeapon
         sequence?.Kill();
         sequence = DOTween.Sequence().
             Append(handGripTransform.
-                DOLocalRotate(new Vector3(45f, 0f, 0f), tweenOptions.Duration).
+                DOLocalRotate(new Vector3(90f, -90f, -40f), tweenOptions.Duration).
                 SetEase(tweenOptions.Ease).
                 OnComplete(Attack)).
             Append(handGripTransform.
