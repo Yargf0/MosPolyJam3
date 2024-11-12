@@ -52,7 +52,7 @@ MonoBehaviour:
   - renderer: {fileID: 3680368732789294780}
     normalMaterials: []
     glitchMaterials: []
-  verticalForce: 30
+  verticalForce: 15
   sideForce: 5
   animator: {fileID: 7379784741164603310}
   activatedAudio: {fileID: 8300000, guid: 926fd7a7cd74f844faea1ada10709a8e, type: 3}
