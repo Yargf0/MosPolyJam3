@@ -98,6 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5adec2b7daae39c47ab77e2b2306c00a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInverted: 0
+  spawnGlitchEffectOnStart: 0
+  glitchEffectPrefab: {fileID: 0}
+  glitchScale: 1
+  collectAudio: {fileID: 8300000, guid: 1a57e0ac3bc962f42a789aa0f4076057, type: 3}
+  invertedCollectAudio: {fileID: 8300000, guid: 6c402d6b43af48f449e6ffb1ab4197b1, type: 3}
 --- !u!65 &6314277228476298537
 BoxCollider:
   m_ObjectHideFlags: 0
