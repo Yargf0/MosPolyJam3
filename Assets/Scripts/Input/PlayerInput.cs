@@ -58,7 +58,10 @@ public class PlayerInput
         //Vector2 rotationVector = inputActions.Player.Look.ReadValue<Vector2>();
         Vector2 rotationVector = new(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"));
         if (rotationVector != Vector2.zero)
+        {           
             OnRotate?.Invoke(rotationVector);
+        }
+           
 
         int scrollDelta = (int)inputActions.Player.ScrollDelta.ReadValue<float>();
         if (scrollDelta != 0)
