@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AngelEnemy : BaseEnemy
+public class AngelEnemy : BaseEnemy2D
 {
     [Header("Configs")]
     [SerializeField] private AngelEnemyConfig defaultBehaviourConfig;

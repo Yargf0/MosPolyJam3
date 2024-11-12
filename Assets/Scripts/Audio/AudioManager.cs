@@ -4,6 +4,7 @@ public class AudioManager : Singleton<AudioManager>
 {
     [Header("Music")]
     [SerializeField] private AudioClip musicClip;
+    [SerializeField] private AudioSource soundSourcePrefab;
 
     private AudioSource musicAudioSource;
     private AudioSource soundAudioSource;
@@ -76,6 +77,11 @@ public class AudioManager : Singleton<AudioManager>
     {
         soundAudioSource.pitch = pitch;
         soundAudioSource.PlayOneShot(clip);
+    }
+
+    public void PlaySoundAtPosition(AudioClip clip, Vector3 position, float pitch = 1f)
+    {
+
     }
 
     public void PlaySound(AudioSource source, AudioClip clip, float pitch = 1f)

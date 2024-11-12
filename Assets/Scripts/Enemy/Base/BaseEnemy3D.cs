@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(HealthSystem))]
-public abstract class BaseEnemy : InvertableBehaviour
+public abstract class BaseEnemy3D : InvertableBehaviour3D
 {
     [Header("Health")]
     [SerializeField] private float maxHealth = 10f;

@@ -21,11 +21,8 @@ public class PauseMenu : BaseMenu
             gameObject.SetActive(false);
 
         pauseAction.Enable();
-        pauseAction.performed += delegate
-        {
-            if (!isPaused)
-                Pause();
-        };
+        pauseAction.performed += OnPauseActionPerformed;
+
         closeButton.onClick.AddListener(Resume);
 
         settingsOpenButton.onClick.AddListener(Hide);
@@ -34,9 +31,20 @@ public class PauseMenu : BaseMenu
         mainMenuButton.onClick.AddListener(SceneController.LoadMainMenu);
     }
 
+    private void OnDestroy()
+    {
+        pauseAction.performed -= OnPauseActionPerformed;
+    }
+
     public void ShowWithoutAnimation()
     {
         gameObject.SetActive(true);
+    }
+
+    private void OnPauseActionPerformed(InputAction.CallbackContext context)
+    {
+        if (!isPaused)
+            Pause();
     }
 
     private void Pause()

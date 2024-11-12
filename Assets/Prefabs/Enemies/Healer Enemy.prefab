@@ -61,9 +61,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInverted: 0
-  spawnGlitchEffectOnStart: 0
-  glitchEffectPrefab: {fileID: 0}
-  glitchScale: 1
+  materialsData:
+  - renderer: {fileID: 1125929274374268302}
+    normalMaterials:
+    - {fileID: -6391279801462837765, guid: 538f8f06b31ae034aa1f2b8ba51a5e95, type: 3}
+    - {fileID: -5092949444811173711, guid: 538f8f06b31ae034aa1f2b8ba51a5e95, type: 3}
+    - {fileID: -5497584352997229786, guid: 538f8f06b31ae034aa1f2b8ba51a5e95, type: 3}
+    - {fileID: -3846018093981099296, guid: 538f8f06b31ae034aa1f2b8ba51a5e95, type: 3}
+    - {fileID: -1697454372284124813, guid: 538f8f06b31ae034aa1f2b8ba51a5e95, type: 3}
+    - {fileID: -876546973899608171, guid: 538f8f06b31ae034aa1f2b8ba51a5e95, type: 3}
+    glitchMaterials:
+    - {fileID: 2100000, guid: 589a3cf0d0435764b89d0d02b76f98c6, type: 2}
+    - {fileID: 2100000, guid: 9b3c15e324153f84e850003e5841bfe3, type: 2}
+    - {fileID: 2100000, guid: 6b2b6720f2912464a9ca712a49c8f5b9, type: 2}
+    - {fileID: 2100000, guid: 4dc6aca9d39c3f7478f54942f3bd4161, type: 2}
+    - {fileID: 2100000, guid: 8935dd65f670bd341b5acc02309e5e8d, type: 2}
+    - {fileID: 2100000, guid: d86f08e48e19e7f4e8751d04218d6469, type: 2}
   maxHealth: 15
   dieAudio: {fileID: 8300000, guid: ab99bcedf52e5e045b1e5e1445668fcf, type: 3}
   attackPreparingAudio: {fileID: 8300000, guid: 3a45e792cde50b84db1386fed8a0965a, type: 3}
@@ -321,6 +334,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 538f8f06b31ae034aa1f2b8ba51a5e95, type: 3}
+--- !u!137 &1125929274374268302 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3228222366484656331, guid: 538f8f06b31ae034aa1f2b8ba51a5e95, type: 3}
+  m_PrefabInstance: {fileID: 2552671922941023557}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2658901603037098670 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 538f8f06b31ae034aa1f2b8ba51a5e95, type: 3}

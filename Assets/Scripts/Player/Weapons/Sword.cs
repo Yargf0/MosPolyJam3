@@ -36,13 +36,13 @@ public class Sword : BaseWeapon
 
     protected override void Attack()
     {
-        Collider[] enemiesColliders = Physics.OverlapSphere(attackPoint.position, attackRadius, enemyLayerMask);
+        Collider[] enemiesColliders = Physics.OverlapSphere(attackPoint.position, attackRadius);
 
         for (int i = 0; i < enemiesColliders.Length; i++)
         {
-            if (enemiesColliders[i].TryGetComponent(out BaseEnemy enemy))
+            if (enemiesColliders[i].TryGetComponent(out IDamagable damagable))
             {
-                enemy.HealthSystem.Damage(damage);
+                damagable.Damage(damage);
             }
         }
     }
