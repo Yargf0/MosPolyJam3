@@ -8,7 +8,8 @@ public class PlayerCamera : PlayerModule
     [SerializeField] private Transform followTransform;
 
     [Header("Rotation")]
-    [SerializeField] private Vector2 sensetivity = new(800f, 800f);
+    [SerializeField] private Vector2 sensetivity = new(20f, 20f);
+    public float sensetivityMultiplayer = 40f;
     [SerializeField] private float minHorizontalAngle = -90f;
     [SerializeField] private float maxHorizontalAngle = 90f;
     [Space(10)]
@@ -29,12 +30,12 @@ public class PlayerCamera : PlayerModule
 
     public Rigidbody rb;              // Ссылка на Rigidbody игрока
 
-    public float minFOV = 45f;        // Минимальное значение FOV
-    public float maxFOV = 120f;       // Максимальное значение FOV
+    public float minFOV = 50f;        // Минимальное значение FOV
+    public float maxFOV = 135f;       // Максимальное значение FOV
     public float walkSpeed = 5.71f;   // Скорость при ходьбе
     public float runSpeed = 9f;      // Скорость при беге
     public float walkFOV = 60f;       // FOV при ходьбе
-    public float runFOV = 80f;        // FOV при беге
+    public float runFOV = 90f;        // FOV при беге
     public float transitionSpeed = 5f;
 
     public override void Init(PlayerInput input)
@@ -76,9 +77,9 @@ public class PlayerCamera : PlayerModule
 
     private void Rotate(Vector2 inputLook)
     {
-        rotation.y += inputLook.x * sensetivity.x * Time.deltaTime;
+        rotation.y += inputLook.x * sensetivity.x*sensetivityMultiplayer * Time.deltaTime;
 
-        rotation.x += inputLook.y * sensetivity.y * Time.deltaTime;
+        rotation.x += inputLook.y * sensetivity.y*sensetivityMultiplayer * Time.deltaTime;
         rotation.x = Mathf.Clamp(rotation.x, minHorizontalAngle, maxHorizontalAngle);
 
         transform.rotation = Quaternion.Euler(rotation);
@@ -100,4 +101,5 @@ public class PlayerCamera : PlayerModule
             SetEase(fovTweenOptions.Ease).
             Play();
     }
+
 }

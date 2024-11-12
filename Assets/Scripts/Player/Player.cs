@@ -24,6 +24,8 @@ public class Player : MonoBehaviour,
 
     public HealthSystem Health => healthSystem;
 
+    public PlayerCamera Cam => cam;
+
     public Vector3 CameraPosition => cam.transform.position;
     public Vector3 LookDirection => cam.transform.forward;
 

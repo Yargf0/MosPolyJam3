@@ -10,6 +10,7 @@ public class SettingsMenu : BaseMenu
     //[SerializeField] private TweenToggle muteSoundToggle;
     [SerializeField] private Slider soundSlider;
     [SerializeField] private Slider sensetivitySlider;
+    [SerializeField] private Slider fovSlider;
 
     protected override void Start()
     {
@@ -26,6 +27,10 @@ public class SettingsMenu : BaseMenu
 
         //muteSoundToggle.IsOn.ValueChanged += (prevValue, newValue) => AudioManager.Instance.MuteSound.Value = !newValue;
         soundSlider.onValueChanged.AddListener((value) => AudioManager.Instance.SoundVolume.Value = value);
+
+        fovSlider.onValueChanged.AddListener((value) => Player.Instance.Cam.maxFOV=value);
+
+        sensetivitySlider.onValueChanged.AddListener((value) => Player.Instance.Cam.sensetivityMultiplayer = value);
     }
 
     private void SetupView()
@@ -35,5 +40,9 @@ public class SettingsMenu : BaseMenu
 
         //muteSoundToggle.IsOn.Value = !AudioManager.Instance.MuteSound.Value;
         soundSlider.SetValueWithoutNotify(AudioManager.Instance.SoundVolume.Value);
+
+        fovSlider.SetValueWithoutNotify(Player.Instance.Cam.maxFOV);
+
+        fovSlider.SetValueWithoutNotify(Player.Instance.Cam.sensetivityMultiplayer);
     }
 }
