@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HealerMageEnemy : BaseEnemy
+public class HealerMageEnemy : BaseEnemy3D
 {
     [SerializeField] private AudioClip attackPreparingAudio;
     [SerializeField] private AudioClip attackAudio;

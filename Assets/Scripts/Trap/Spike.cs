@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Spike : InvertableBehaviour
+public class Spike : InvertableBehaviour3D
 {
     public float DamageInterval = 3.0f;
     public float Damage = 20f;
@@ -16,6 +16,7 @@ public class Spike : InvertableBehaviour
                 Player.Instance.Health.Heal(Damage);
             else
                 Player.Instance.Health.Damage(Damage);
+
             damageCoroutine = StartCoroutine(RestartSpike());
             AudioManager.Instance.PlaySound(hitAudio, Random.Range(0.9f, 1.1f));
         }

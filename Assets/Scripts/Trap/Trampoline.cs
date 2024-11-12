@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Trampoline : InvertableBehaviour
+public class Trampoline : InvertableBehaviour3D
 {
     [Header("Trampoline Settings")]
     public float verticalForce = 10f;

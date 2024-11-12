@@ -4960,6 +4960,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u0431\u043E\u0447\u043A\u0430"
       objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 6d542a66317c2734088a26fc8e8bf320, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d4d532f8edf189846b066de92b280b44, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 65702495048144492, guid: 6d542a66317c2734088a26fc8e8bf320, type: 3}
@@ -4976,6 +4980,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1749994092665296652}
   m_SourcePrefab: {fileID: 100100000, guid: 6d542a66317c2734088a26fc8e8bf320, type: 3}
+--- !u!23 &2404657357246260268 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7202271454713460447, guid: 6d542a66317c2734088a26fc8e8bf320, type: 3}
+  m_PrefabInstance: {fileID: 4804378295184446195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4982720510806570264 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6d542a66317c2734088a26fc8e8bf320, type: 3}
@@ -5020,11 +5029,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInverted: 0
-  spawnGlitchEffectOnStart: 0
-  glitchEffectPrefab: {fileID: 0}
-  glitchScale: 1
+  materialsData:
+  - renderer: {fileID: 2404657357246260268}
+    normalMaterials:
+    - {fileID: 2100000, guid: d4d532f8edf189846b066de92b280b44, type: 2}
+    glitchMaterials:
+    - {fileID: 2100000, guid: 9c85851119e47894ba595c40510a12f6, type: 2}
   ObjectToActivate: {fileID: 0}
-  particleSystem: {fileID: 3018333391622755549}
+  explosionParticleSystem: {fileID: 3018333391622755549}
   startTime: 2
   simulationSpeedScale: 1
   T: 0

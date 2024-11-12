@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class Barrel : InvertableBehaviour, IDamagable
+public class Barrel : InvertableBehaviour3D, IDamagable
 {
     public GameObject ObjectToActivate;
-    public ParticleSystem particleSystem;
+    public ParticleSystem explosionParticleSystem;
     public float startTime = 2.0f;
     public float simulationSpeedScale = 1.0f;
     public float T;
@@ -41,8 +41,8 @@ public class Barrel : InvertableBehaviour, IDamagable
     private void PlayParticlesNormally()
     {
         StopAllCoroutines();
-        particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        particleSystem.Play(true);
+        explosionParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        explosionParticleSystem.Play(true);
 
         // Запускаем корутину, чтобы дождаться завершения анимации и уничтожить объект
         StartCoroutine(DestroyAfterNormalAnimation());
@@ -57,7 +57,7 @@ public class Barrel : InvertableBehaviour, IDamagable
     private IEnumerator DestroyAfterNormalAnimation()
     {
         // Ожидаем завершения анимации
-        yield return new WaitForSeconds(particleSystem.main.duration);
+        yield return new WaitForSeconds(explosionParticleSystem.main.duration);
 
         // Уничтожаем объект
         Destroy(gameObject);
@@ -66,14 +66,14 @@ public class Barrel : InvertableBehaviour, IDamagable
     IEnumerator InverseParticle()
     {
         // Полностью останавливаем систему, чтобы можно было сменить AutoRandomSeed
-        particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        explosionParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
         // Немного ждем, чтобы убедиться, что все частицы исчезли
         yield return new WaitForSeconds(0.1f);
 
         // Отключаем автосемя
-        bool useAutoRandomSeed = particleSystem.useAutoRandomSeed;
-        particleSystem.useAutoRandomSeed = false;
+        bool useAutoRandomSeed = explosionParticleSystem.useAutoRandomSeed;
+        explosionParticleSystem.useAutoRandomSeed = false;
 
         // Инициализируем симуляцию
         currentSimulationTime = startTime;
@@ -81,10 +81,10 @@ public class Barrel : InvertableBehaviour, IDamagable
         // Запускаем симуляцию в обратном направлении
         while (currentSimulationTime > 0)
         {
-            particleSystem.Play(false);
-            float deltaTime = particleSystem.main.useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
-            currentSimulationTime -= deltaTime * particleSystem.main.simulationSpeed * simulationSpeedScale;
-            particleSystem.Simulate(currentSimulationTime, true, true, true);
+            explosionParticleSystem.Play(false);
+            float deltaTime = explosionParticleSystem.main.useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+            currentSimulationTime -= deltaTime * explosionParticleSystem.main.simulationSpeed * simulationSpeedScale;
+            explosionParticleSystem.Simulate(currentSimulationTime, true, true, true);
 
             // Если анимация завершена
             if (currentSimulationTime <= 0)
