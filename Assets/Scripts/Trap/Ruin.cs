@@ -32,6 +32,7 @@ public class Ruin : InvertableBehaviour
             MeshPlatform.transform.position = MeshPlatform.transform.position - Vector3.up * fallDistance;
             initialPosition = transform.position;
             MeshPlatform.SetActive(false);
+
         }
 
     }
