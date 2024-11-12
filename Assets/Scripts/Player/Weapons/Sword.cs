@@ -44,6 +44,14 @@ public class Sword : BaseWeapon
             {
                 damagable.Damage(damage);
             }
+            else if (enemiesColliders[i].TryGetComponent(out BaseEnemy2D enemy2D))
+            {
+                enemy2D.HealthSystem.Damage(damage);
+            }
+            else if (enemiesColliders[i].TryGetComponent(out BaseEnemy3D enemy3D))
+            {
+                enemy3D.HealthSystem.Damage(damage);
+            }
         }
     }
 

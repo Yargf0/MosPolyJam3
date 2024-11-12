@@ -4,7 +4,6 @@ public class AudioManager : Singleton<AudioManager>
 {
     [Header("Music")]
     [SerializeField] private AudioClip musicClip;
-    [SerializeField] private AudioSource soundSourcePrefab;
 
     private AudioSource musicAudioSource;
     private AudioSource soundAudioSource;
@@ -81,7 +80,8 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlaySoundAtPosition(AudioClip clip, Vector3 position, float pitch = 1f, float radius = 100f)
     {
-        AudioSource source = Instantiate(soundSourcePrefab, position, Quaternion.identity);
+        AudioSource source = new GameObject("source").AddComponent<AudioSource>();
+        source.transform.position = position;
         source.clip = clip;
         source.pitch = pitch;
         source.maxDistance = radius;
