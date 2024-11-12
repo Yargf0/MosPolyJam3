@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc9b2547657bb24ba2fdec0b575eb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInverted: 1
+  isInverted: 0
   disableOnStart: 0
   healthSystem: {fileID: 0}
   fillImage: {fileID: 3224918163218297162}
