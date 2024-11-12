@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static UnityEngine.Rendering.VolumeComponent;
 
 [Serializable]
 public class IB3DData
@@ -14,9 +15,15 @@ public abstract class InvertableBehaviour3D : InvertableBehaviour
     [Header("Glitch Effect")]
     [SerializeField] private IB3DData[] materialsData;
 
-    public override void SetInvertable(bool invert)
+    protected override void Start()
     {
-        if (invert)
+        ChangeMaterials();
+        base.Start();
+    }
+
+    protected void ChangeMaterials()
+    {
+        if (isInverted)
         {
             foreach (IB3DData data in materialsData)
                 data.renderer.materials = data.glitchMaterials;
@@ -26,7 +33,5 @@ public abstract class InvertableBehaviour3D : InvertableBehaviour
             foreach (IB3DData data in materialsData)
                 data.renderer.materials = data.normalMaterials;
         }
-
-        base.SetInvertable(invert);
     }
 }
