@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpeedBuster : InvertableBehaviour
+public class SpeedBuster : InvertableBehaviour2D
 {
     public float multiplayer = 0.3f;
     public float duration = 5f;
