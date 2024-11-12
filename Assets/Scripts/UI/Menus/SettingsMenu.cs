@@ -11,6 +11,8 @@ public class SettingsMenu : BaseMenu
     [SerializeField] private Slider soundSlider;
     [SerializeField] private Slider sensetivitySlider;
     [SerializeField] private Slider fovSlider;
+    [SerializeField] private Slider mouseSlider;
+    [SerializeField] private AimCursor mouseAim;
 
     protected override void Start()
     {
@@ -31,6 +33,8 @@ public class SettingsMenu : BaseMenu
         fovSlider.onValueChanged.AddListener((value) => Player.Instance.Cam.maxFOV=value);
 
         sensetivitySlider.onValueChanged.AddListener((value) => Player.Instance.Cam.sensetivityMultiplayer = value);
+
+        mouseSlider.onValueChanged.AddListener((value) => mouseAim.SetCursor(value));
     }
 
     private void SetupView()
@@ -44,5 +48,7 @@ public class SettingsMenu : BaseMenu
         fovSlider.SetValueWithoutNotify(Player.Instance.Cam.maxFOV);
 
         sensetivitySlider.SetValueWithoutNotify(Player.Instance.Cam.sensetivityMultiplayer);
+
+        mouseSlider.SetValueWithoutNotify(mouseAim.cursor);
     }
 }
