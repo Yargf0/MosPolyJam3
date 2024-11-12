@@ -1,15 +1,13 @@
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 public class LevelsManager : Singleton<LevelsManager>
 {
-    private readonly int levelsCount = SceneManager.sceneCount - 1;
+    private readonly int levelsCount;
     public List<LevelData> LevelDatas { get; private set; }
 
     protected override void Init()
     {
         initialized = true;
-
         DontDestroyOnLoad(this);
 
         LoadData();
@@ -35,8 +33,8 @@ public class LevelsManager : Singleton<LevelsManager>
 
     private void LoadData()
     {
-        LevelDatas = new List<LevelData>(levelsCount);
-        for (int i = 0; i < levelsCount; i++)
+        LevelDatas = new List<LevelData>(6);
+        for (int i = 0; i < 6; i++)
         {
             LevelDatas.Add(new LevelData(i + 1, SaveSystem.GetInt($"{i}_sc")));
         }

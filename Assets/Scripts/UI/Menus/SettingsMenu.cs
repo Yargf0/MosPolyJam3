@@ -29,12 +29,13 @@ public class SettingsMenu : BaseMenu
 
         //muteSoundToggle.IsOn.ValueChanged += (prevValue, newValue) => AudioManager.Instance.MuteSound.Value = !newValue;
         soundSlider.onValueChanged.AddListener((value) => AudioManager.Instance.SoundVolume.Value = value);
+        if (Player.Instance)
+        {
+            fovSlider.onValueChanged.AddListener((value) => Player.Instance.Cam.maxFOV = value);
 
-        fovSlider.onValueChanged.AddListener((value) => Player.Instance.Cam.maxFOV=value);
-
-        sensetivitySlider.onValueChanged.AddListener((value) => Player.Instance.Cam.sensetivityMultiplayer = value);
-
-        mouseSlider.onValueChanged.AddListener((value) => mouseAim.SetCursor(value));
+            sensetivitySlider.onValueChanged.AddListener((value) => Player.Instance.Cam.sensetivityMultiplayer = value);
+            mouseSlider.onValueChanged.AddListener((value) => mouseAim.SetCursor(value));
+        }
     }
 
     private void SetupView()
@@ -45,10 +46,13 @@ public class SettingsMenu : BaseMenu
         //muteSoundToggle.IsOn.Value = !AudioManager.Instance.MuteSound.Value;
         soundSlider.SetValueWithoutNotify(AudioManager.Instance.SoundVolume.Value);
 
-        fovSlider.SetValueWithoutNotify(Player.Instance.Cam.maxFOV);
+        if (Player.Instance)
+        {
+            fovSlider.SetValueWithoutNotify(Player.Instance.Cam.maxFOV);
 
-        sensetivitySlider.SetValueWithoutNotify(Player.Instance.Cam.sensetivityMultiplayer);
+            sensetivitySlider.SetValueWithoutNotify(Player.Instance.Cam.sensetivityMultiplayer);
+            mouseSlider.SetValueWithoutNotify(mouseAim.cursor);
+        }
 
-        mouseSlider.SetValueWithoutNotify(mouseAim.cursor);
     }
 }
