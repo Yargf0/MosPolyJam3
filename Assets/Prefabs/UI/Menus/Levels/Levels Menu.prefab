@@ -142,7 +142,6 @@ MonoBehaviour:
   panelEndPosition: {x: -100, y: 0}
   buttonsContainer: {fileID: 3643220469275821837}
   buttonPrefab: {fileID: 1545681806983121773, guid: 8fda427b27519d94296b44faffae4d9e, type: 3}
-  levelsCount: 2
 --- !u!1 &3410317460983865015
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,8 +210,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: d60485f44a219444085a186b40e33abc, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -220,7 +219,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 2.73
 --- !u!1 &6334869714038485353
 GameObject:
   m_ObjectHideFlags: 0

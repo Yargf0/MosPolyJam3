@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelsManager : Singleton<LevelsManager>
 {
-    private readonly int levelsCount = 2;
+    private readonly int levelsCount = SceneManager.sceneCount - 1;
     public List<LevelData> LevelDatas { get; private set; }
 
     protected override void Init()
@@ -44,7 +44,7 @@ public class LevelsManager : Singleton<LevelsManager>
 
     private void SaveData()
     {
-        if (LevelDatas != null) return;
+        if (LevelDatas == null) return;
 
         for (int i = 0; i < LevelDatas.Count; i++)
         {
