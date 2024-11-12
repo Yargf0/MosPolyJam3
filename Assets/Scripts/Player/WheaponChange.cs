@@ -5,8 +5,11 @@ public class WheaponChange : MonoBehaviour
     [SerializeField] private BaseWeapon[] weapons; // Массив доступного оружия
     private int currentWeaponIndex = 0; // Индекс текущего оружия
 
+    private bool isEnabled;
+
     void Start()
     {
+        isEnabled = true;
         // Активируем первое оружие
         if (weapons.Length > 0)
         {
@@ -14,8 +17,21 @@ public class WheaponChange : MonoBehaviour
         }
     }
 
+    public void Enable()
+    {
+        isEnabled = true;
+    }
+
+    public void Disable()
+    {
+        isEnabled = false;
+    }
+
     void Update()
     {
+        if (!isEnabled)
+            return;
+
         // Проверяем нажатие клавиш 1 и 2 для переключения
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -51,6 +67,7 @@ public class WheaponChange : MonoBehaviour
     // Переключение на следующее оружие по направлению (1 для вперед, -1 для назад)
     private void SwitchToNextWeapon(int direction)
     {
+        Debug.LogWarning(isEnabled);
         currentWeaponIndex = (currentWeaponIndex + direction + weapons.Length) % weapons.Length;
         ActivateWeapon(currentWeaponIndex);
     }

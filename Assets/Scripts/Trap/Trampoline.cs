@@ -22,7 +22,7 @@ public class Trampoline : InvertableBehaviour3D
     private IEnumerator LaunchPlayer()
     {
         animator.Play(AnimationHash);
-        AudioManager.Instance.PlaySound(activatedAudio, Random.Range(0.9f, 1.1f));
+        AudioManager.Instance.PlaySoundAtPosition(activatedAudio, transform.position, Random.Range(0.9f, 1.1f));
 
         Vector3 launchVelocity = Vector3.up * verticalForce;
 

@@ -10,12 +10,12 @@ public class StarCollectable : BaseCollectable
     {
         if (isInverted)
         {
-            AudioManager.Instance.PlaySound(invertedCollectAudio, Random.Range(0.9f, 1.1f));
+            AudioManager.Instance.PlaySoundAtPosition(invertedCollectAudio, transform.position, Random.Range(0.9f, 1.1f));
             Player.RemoveStar();
         }
         else
         {
-            AudioManager.Instance.PlaySound(collectAudio, Random.Range(0.9f, 1.1f));
+            AudioManager.Instance.PlaySoundAtPosition(collectAudio, transform.position, Random.Range(0.9f, 1.1f));
             Player.AddStar();
         }
         Destroy(gameObject);

@@ -40,7 +40,7 @@ public class HealerMageEnemy : BaseEnemy3D
 
     private void CastHeal()
     {
-        AudioManager.Instance.PlaySound(attackAudio, Random.Range(0.9f, 1.1f));
+        AudioManager.Instance.PlaySoundAtPosition(attackAudio, healPosition, Random.Range(0.9f, 1.1f));
         float duration = (projectileSpawnPoint.position.Distance(healPosition) / moveSpeed) * Time.deltaTime;
         Instantiate(healParticlePrefab, projectileSpawnPoint.position, Quaternion.identity).
             Init(duration, healPosition).
@@ -65,7 +65,7 @@ public class HealerMageEnemy : BaseEnemy3D
             cooldownTimer.Play(healCooldown + healCastTime);
             castPreparingTimer.Play(healCastTime);
 
-            AudioManager.Instance.PlaySound(attackPreparingAudio, Random.Range(0.9f, 1.1f));
+            AudioManager.Instance.PlaySoundAtPosition(attackPreparingAudio, transform.position, Random.Range(0.9f, 1.1f));
         }
     }
 

@@ -24,12 +24,15 @@ public abstract class BaseWeapon : PlayerModule
     {
         input.OnAttack += Animate;
         gameObject.SetActive(true);
+        Debug.Log("Enable");
     }
 
     public virtual void Disable()
     {
         input.OnAttack -= Animate;
         gameObject.SetActive(false);
+
+        Debug.Log("Disable");
     }
 
     protected abstract void Animate();

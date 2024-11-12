@@ -26,7 +26,7 @@ public abstract class InvertableBehaviour2D : InvertableBehaviour
     protected void SpawnGlitchEffect()
     {
         glitchEffectInstance = Instantiate(glitchEffectPrefab, transform);
-        glitchEffectInstance.transform.position += 0.1f * Vector3.forward;
+        glitchEffectInstance.transform.localPosition += 0.1f * Vector3.forward;
         glitchEffectInstance.SetScale(glitchScale);
         glitchEffectInstance.SetActive(false);
     }

@@ -79,9 +79,15 @@ public class AudioManager : Singleton<AudioManager>
         soundAudioSource.PlayOneShot(clip);
     }
 
-    public void PlaySoundAtPosition(AudioClip clip, Vector3 position, float pitch = 1f)
+    public void PlaySoundAtPosition(AudioClip clip, Vector3 position, float pitch = 1f, float radius = 100f)
     {
-
+        AudioSource source = Instantiate(soundSourcePrefab, position, Quaternion.identity);
+        source.clip = clip;
+        source.pitch = pitch;
+        source.maxDistance = radius;
+        source.volume = SoundVolume.Value;
+        source.Play();
+        Destroy(source, clip.length);
     }
 
     public void PlaySound(AudioSource source, AudioClip clip, float pitch = 1f)

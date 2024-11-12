@@ -21,7 +21,7 @@ public abstract class BaseEnemy2D : InvertableBehaviour2D
 
     protected virtual void OnDied()
     {
-        AudioManager.Instance.PlaySound(dieAudio, Random.Range(0.9f, 1.1f));
+        AudioManager.Instance.PlaySoundAtPosition(dieAudio, transform.position, Random.Range(0.9f, 1.1f));
         Player.AddStar();
         Destroy(gameObject);
     }

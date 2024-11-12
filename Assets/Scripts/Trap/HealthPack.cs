@@ -21,7 +21,7 @@ public class HealthPack : InvertableBehaviour, ICollectable
             Player.Instance.Health.Heal(healAmount);
         }
 
-        AudioManager.Instance.PlaySound(collectedAudio, Random.Range(0.9f, 1.1f));
+        AudioManager.Instance.PlaySoundAtPosition(collectedAudio, transform.position, Random.Range(0.9f, 1.1f));
 
         Destroy(gameObject);
 

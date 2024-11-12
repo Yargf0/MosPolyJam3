@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static UnityEngine.Rendering.VolumeComponent;
 
 [Serializable]
 public class IB3DData

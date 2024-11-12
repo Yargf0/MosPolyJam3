@@ -10,6 +10,7 @@ public class Player : MonoBehaviour,
     [SerializeField] private HealthSystem healthSystem;
     [SerializeField] private BaseWeapon weapon;
     [SerializeField] private BaseWeapon secondWeapon;
+    [SerializeField] private WheaponChange wheaponChange;
 
     [Header("Stats")]
     [SerializeField] private float maxHealth = 30f;
@@ -95,11 +96,13 @@ public class Player : MonoBehaviour,
     public void OnGamePaused()
     {
         input.Disable();
+        wheaponChange.Disable();
     }
 
     public void OnGameResumed()
     {
         input.Enable();
+        wheaponChange.Enable();
     }
 
     private void OnTriggerEnter(Collider other)

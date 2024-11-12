@@ -18,7 +18,7 @@ public class Spike : InvertableBehaviour3D
                 Player.Instance.Health.Damage(Damage);
 
             damageCoroutine = StartCoroutine(RestartSpike());
-            AudioManager.Instance.PlaySound(hitAudio, Random.Range(0.9f, 1.1f));
+            AudioManager.Instance.PlaySoundAtPosition(hitAudio, transform.position, Random.Range(0.9f, 1.1f));
         }
     }
 

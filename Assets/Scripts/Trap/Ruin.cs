@@ -59,7 +59,7 @@ public class Ruin : InvertableBehaviour
             OnStart(() =>
             {
                 platformCollider.enabled = isInverted;
-                if (!isInverted) AudioManager.Instance.PlaySound(fallAudio, Random.Range(0.9f, 1.1f));
+                if (!isInverted) AudioManager.Instance.PlaySoundAtPosition(fallAudio, transform.position, Random.Range(0.9f, 1.1f));
             }).
             OnComplete(() =>
             {

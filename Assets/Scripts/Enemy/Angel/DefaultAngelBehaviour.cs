@@ -155,4 +155,9 @@ public class DefaultAngelBehaviour
         if (config.chaseDistance < config.offset)
             Debug.LogError("[FlyingEnemyBehaviour] Chase Distance should not be less than Offset");
     }
+
+    private void OnDied()
+    {
+
+    }
 }
