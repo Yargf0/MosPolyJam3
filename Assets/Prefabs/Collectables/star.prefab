@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3533843590256270205}
   - component: {fileID: 7333282228166853761}
   - component: {fileID: 2566052203535157791}
-  - component: {fileID: 9200931782605792206}
+  - component: {fileID: 6314277228476298537}
   m_Layer: 0
   m_Name: star
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.302328, y: 8.385, z: -33.982647}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f1a0ed90b435921448d47bb1a4ae24d8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 69634ce91f6d58d4b8dbe85e275fd025, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5adec2b7daae39c47ab77e2b2306c00a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &9200931782605792206
+--- !u!65 &6314277228476298537
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,5 +117,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 11.19, y: 10.56, z: 0.2}
+  m_Size: {x: 0.39999998, y: 0.33999997, z: 0.19999999}
   m_Center: {x: 0, y: 0, z: 0}
