@@ -43,6 +43,6 @@ public class SettingsMenu : BaseMenu
 
         fovSlider.SetValueWithoutNotify(Player.Instance.Cam.maxFOV);
 
-        fovSlider.SetValueWithoutNotify(Player.Instance.Cam.sensetivityMultiplayer);
+        sensetivitySlider.SetValueWithoutNotify(Player.Instance.Cam.sensetivityMultiplayer);
     }
 }

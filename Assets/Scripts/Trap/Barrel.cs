@@ -17,12 +17,13 @@ public class Barrel : InvertableBehaviour, IDamagable
             ObjectToActivate.SetActive(false);
         else
             ObjectToActivate.SetActive(true);
-
     }
 
     public void Damage(float damage)
     {
-        if (isInverted)
+        gameObject.GetComponent<Collider>().enabled = false;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        if (isInverted)         
             ObjectToActivate.SetActive(true);
         else
             ObjectToActivate.SetActive(false);
@@ -35,15 +36,16 @@ public class Barrel : InvertableBehaviour, IDamagable
 
     protected override void OnInverted()
     {
-
     }
-
 
     private void PlayParticlesNormally()
     {
         StopAllCoroutines();
         particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         particleSystem.Play(true);
+
+        // Запускаем корутину, чтобы дождаться завершения анимации и уничтожить объект
+        StartCoroutine(DestroyAfterNormalAnimation());
     }
 
     private void StartInverseParticleCoroutine()
@@ -52,6 +54,14 @@ public class Barrel : InvertableBehaviour, IDamagable
         StartCoroutine(InverseParticle());
     }
 
+    private IEnumerator DestroyAfterNormalAnimation()
+    {
+        // Ожидаем завершения анимации
+        yield return new WaitForSeconds(particleSystem.main.duration);
+
+        // Уничтожаем объект
+        Destroy(gameObject);
+    }
 
     IEnumerator InverseParticle()
     {
@@ -69,24 +79,29 @@ public class Barrel : InvertableBehaviour, IDamagable
         currentSimulationTime = startTime;
 
         // Запускаем симуляцию в обратном направлении
-        while (true)
+        while (currentSimulationTime > 0)
         {
             particleSystem.Play(false);
             float deltaTime = particleSystem.main.useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
             currentSimulationTime -= deltaTime * particleSystem.main.simulationSpeed * simulationSpeedScale;
             particleSystem.Simulate(currentSimulationTime, true, true, true);
 
+            // Если анимация завершена
             if (currentSimulationTime <= 0)
             {
-                currentSimulationTime = T;
+                break;
             }
 
             yield return null;
         }
 
         // Восстанавливаем состояние AutoRandomSeed, если необходимо
-        particleSystem.useAutoRandomSeed = useAutoRandomSeed;
+        //particleSystem.useAutoRandomSeed = useAutoRandomSeed;
+
+        // Уничтожаем объект после завершения обратной анимации
+        Destroy(gameObject);
     }
 }
+
 
 

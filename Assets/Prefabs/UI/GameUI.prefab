@@ -1139,6 +1139,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5258955083129410877, guid: 04e77d64e22ac77479bfa72ed2baa195, type: 3}
+      propertyPath: fovSlider
+      value: 
+      objectReference: {fileID: 7373637897671325894}
+    - target: {fileID: 5258955083129410877, guid: 04e77d64e22ac77479bfa72ed2baa195, type: 3}
       propertyPath: openButton
       value: 
       objectReference: {fileID: 3691383027288984620}
