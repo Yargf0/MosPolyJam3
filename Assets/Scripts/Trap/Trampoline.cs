@@ -28,8 +28,9 @@ public class Trampoline : InvertableBehaviour3D
 
         if (isInverted)
         {
-            launchVelocity += Vector3.right * sideForce;
+            launchVelocity += transform.right * sideForce;
         }
+
         Player.Instance.PlayerMovement.Rigidbody.velocity = launchVelocity;
         yield return new WaitForSeconds(0.1f);
         Player.Instance.PlayerMovement.JumpOnSpring();

@@ -50,9 +50,15 @@ MonoBehaviour:
   isInverted: 0
   materialsData:
   - renderer: {fileID: 3680368732789294780}
-    normalMaterials: []
-    glitchMaterials: []
-  verticalForce: 15
+    normalMaterials:
+    - {fileID: -3846018093981099296, guid: 8e40ba918cb309749b997c231feab74c, type: 3}
+    - {fileID: -6478536213147159724, guid: 8e40ba918cb309749b997c231feab74c, type: 3}
+    - {fileID: -876546973899608171, guid: 8e40ba918cb309749b997c231feab74c, type: 3}
+    glitchMaterials:
+    - {fileID: 2100000, guid: b1dc2eacc68caed43a4fea8b65eabee5, type: 2}
+    - {fileID: 2100000, guid: ce0138a88dead95478a84e50a7a41365, type: 2}
+    - {fileID: 2100000, guid: 3e2ca92a7eea14b42865a46e278101d4, type: 2}
+  verticalForce: 30
   sideForce: 5
   animator: {fileID: 7379784741164603310}
   activatedAudio: {fileID: 8300000, guid: 926fd7a7cd74f844faea1ada10709a8e, type: 3}
