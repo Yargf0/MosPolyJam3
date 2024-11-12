@@ -20,7 +20,6 @@ public class Ruin : InvertableBehaviour
 
     private Tween tween;
 
-
     protected override void Start()
     {
         base.Start();
@@ -34,107 +33,70 @@ public class Ruin : InvertableBehaviour
             initialPosition = transform.position;
             MeshPlatform.SetActive(false);
         }
-
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.collider.CompareTag("Player"))
+        if (other.collider.CompareTag("Player") && !isMoving)
         {
-            if (isMoving)
-                return;
-
-            MeshPlatform.SetActive(true);
-
-            isMoving = true;
-            float endPosY = isInverted ? initialPositionY : initialPositionY - fallDistance;
-            float delay = !isInverted ? fallDelay : 0f;
-
-            tween?.Kill();
-            tween = MeshPlatform.transform.
-                DOMoveY(endPosY, tweenOptions.Duration).
-                SetEase(tweenOptions.Ease).
-                SetDelay(delay).
-                OnStart(delegate
-                {
-                    platformCollider.enabled = isInverted;
-                    if (!isInverted) AudioManager.Instance.PlaySound(fallAudio, Random.Range(0.9f, 1.1f));
-                }).
-                OnComplete(delegate
-                {
-                    isMoving = false;
-                    MeshPlatform.SetActive(isInverted);
-                }).
-                OnKill(() => isMoving = false).
-                Play();
-        }
-
-
-        //if (other.collider.CompareTag("Player") && !isMoving) 
-        //{
-        //    TriggerPlatform();
-        //}
-    }
-    private void OnCollisionExit(Collision other)
-    {
-        if (other.collider.CompareTag("Player"))
-        {
-            float endPosY = isInverted ? initialPositionY - fallDistance : initialPositionY;
-            if (isInverted) AudioManager.Instance.PlaySound(fallAudio, Random.Range(0.9f, 1.1f));
-
-            tween?.Kill();
-            tween = MeshPlatform.transform.
-                DOMoveY(endPosY, tweenOptions.Duration).
-                SetEase(tweenOptions.Ease).
-                OnComplete(delegate
-                {
-                    platformCollider.enabled = true;
-                    MeshPlatform.SetActive(!isInverted);
-                }).
-                Play();
-
-            //if (!isInverted)
-            //    return;
-
-            //tween = MeshPlatform.transform.DOMove(initialPosition - Vector3.up * fallDistance, 1f).SetDelay(returnDelay).Play().OnComplete(() =>
-            //{
-            //    isMoving = false;
-            //    MeshPlatform.SetActive(false);
-            //});
+            StartFalling();
         }
     }
 
-    private void TriggerPlatform()
+    private void StartFalling()
     {
         isMoving = true;
-        if (!isInverted)
-        {
-            Vector3 targetPosition = initialPosition - Vector3.up * fallDistance;
+        MeshPlatform.SetActive(true);
 
-            tween = transform.DOMove(targetPosition, 1f).SetDelay(fallDelay).Play().OnComplete(() =>
+        float endPosY = isInverted ? initialPositionY : initialPositionY - fallDistance;
+        float delay = !isInverted ? fallDelay : 0f;
+
+        tween?.Kill();
+        tween = MeshPlatform.transform.
+            DOMoveY(endPosY, tweenOptions.Duration).
+            SetEase(tweenOptions.Ease).
+            SetDelay(delay).
+            OnStart(() =>
             {
-                platformCollider.enabled = false;
+                platformCollider.enabled = isInverted;
+                if (!isInverted) AudioManager.Instance.PlaySound(fallAudio, Random.Range(0.9f, 1.1f));
+            }).
+            OnComplete(() =>
+            {
+                isMoving = false;
+                Invoke(nameof(StartReturning), returnDelay); // Запускаем таймер для возврата
+            }).
+            Play();
+    }
 
-                tween = transform.DOMove(initialPosition, 1f).SetDelay(returnDelay).Play().OnComplete(() =>
-                {
-                    platformCollider.enabled = true;
-                    isMoving = false;
-                });
-            });
-        }
-        else
-        {
-            MeshPlatform.SetActive(true);
-            Vector3 targetPosition = initialPosition;
+    private void StartReturning()
+    {
+        if (isMoving) return; // Если платформа уже движется, отменяем возврат
 
-            tween = MeshPlatform.transform.DOMove(targetPosition, 1f).SetDelay(0).Play();
-        }
+        float endPosY = isInverted ? initialPositionY - fallDistance : initialPositionY;
+
+        tween?.Kill();
+        tween = MeshPlatform.transform.
+            DOMoveY(endPosY, tweenOptions.Duration).
+            SetEase(tweenOptions.Ease).
+            OnComplete(() =>
+            {
+                platformCollider.enabled = true;
+                MeshPlatform.SetActive(!isInverted);
+            }).
+            Play();
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        // Убираем возврат, чтобы платформа не реагировала на выход игрока
     }
 
     protected override void OnInverted()
     {
-
+        // Ваша логика для инвертирования платформы
     }
 }
+
 
 
