@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: 814f86fa65cdfa841a445f886c9b47ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 814f86fa65cdfa841a445f886c9b47ae, type: 3}
       propertyPath: m_Name
       value: rock
