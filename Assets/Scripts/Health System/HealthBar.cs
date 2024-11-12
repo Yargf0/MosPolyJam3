@@ -9,6 +9,12 @@ public class HealthBar : BaseInvertableUIElement
 
     [Header("UI References")]
     [SerializeField] private Image fillImage;
+    [SerializeField] private Image spriteImage;
+    [SerializeField] private Sprite reverseSprite;
+    [SerializeField] private Sprite Sprite;
+    [SerializeField] private Color color;
+    [SerializeField] private Color reverseColor;
+
     [SerializeField] private TweenOptions tweenOptions;
 
     private Tween tween;
@@ -19,6 +25,19 @@ public class HealthBar : BaseInvertableUIElement
 
         if (disableOnStart)
             gameObject.SetActive(false);
+
+        if (isInverted)
+        {
+            spriteImage.sprite = reverseSprite;
+            fillImage.color = reverseColor;
+        }      
+        else
+        {
+            spriteImage.sprite = Sprite;
+            fillImage.color = color;
+        }
+           
+
     }
 
     public void SetHealthSystem(HealthSystem healthSystem)
