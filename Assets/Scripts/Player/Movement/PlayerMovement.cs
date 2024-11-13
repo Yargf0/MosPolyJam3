@@ -38,6 +38,14 @@ public class PlayerMovement : PlayerModule
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float jumpCooldown = 1f;
 
+    [Header("Climb Settings")]
+    //[SerializeField] private float minContactOffset = 0.01f;
+    [SerializeField] private float frontClimbJumpForceMultiplyer = 1.5f;
+    [SerializeField] private float backClimbJumpForceMultiplyer = 1f;
+    [Space(5)]
+    [SerializeField] private float horizontalClimbOffset = 0.75f;
+    [SerializeField] private float verticalClimbOffset = 0.5f;
+
     [Header("Ground Check Settings")]
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private float groundCheckRadius = 0.1f;
@@ -53,8 +61,11 @@ public class PlayerMovement : PlayerModule
 
     private bool readyToJump = true;
     private bool isGrounded;
+
+    private bool isOnSpring;
+
     private bool isAlmostGrounded;
-    private bool isOnSpring=false;
+    private bool isFrontAlmostGrounded;
 
     public Rigidbody rb;
     private Transform cameraTransform;
@@ -167,7 +178,8 @@ public class PlayerMovement : PlayerModule
         Vector3 force =
             moveInput.y * currentSpeed * directionTransform.forward +
             moveInput.x * currentSpeed * directionTransform.right;
-        if(isOnSpring)
+
+        if (isOnSpring)
         {
             force.x *= airVelocityMultiplierOnSpring;
             force.z *= airVelocityMultiplierOnSpring;
@@ -193,7 +205,29 @@ public class PlayerMovement : PlayerModule
         if (!readyToJump || (!isGrounded && !isAlmostGrounded))
             return;
 
-        rb.AddForce(jumpForce * transform.up, ForceMode.Impulse);
+        Vector3 force = jumpForce * transform.up;
+
+        if (isAlmostGrounded)
+        {
+            if (isFrontAlmostGrounded)
+            {
+                if (directionTransform.forward.Angle(rb.velocity) < 90f)
+                {
+                    force *= frontClimbJumpForceMultiplyer;
+                    force += directionTransform.forward;
+                    Debug.Log("Front Climb");
+                }
+            }
+            else
+            {
+                force *= backClimbJumpForceMultiplyer;
+                Debug.Log("Back Climb");
+            }
+        }
+
+        rb.AddForce(force, ForceMode.Impulse);
+        isAlmostGrounded = false;
+        
         AudioManager.Instance.PlaySound(jumpAudio, Random.Range(0.9f, 1.1f));
 
         readyToJump = false;
@@ -213,25 +247,37 @@ public class PlayerMovement : PlayerModule
     private void CalculateGrounded()
     {
         bool isGroundedCurrentFrame = Physics.CheckSphere(transform.position, groundCheckRadius, groundLayerMask);
-        Vector3 back = transform.TransformDirection(Vector3.back);
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        if (Physics.Raycast(transform.position, back, groundCheckRadius + 0.7f, groundLayerMask))
-        {            
-            isAlmostGrounded = true;
-        }
-        else if(Physics.Raycast(transform.position, fwd, groundCheckRadius + 0.3f, groundLayerMask))
-        {
-            isAlmostGrounded = true;
-        }
-        else 
-        {
-            isAlmostGrounded = isGrounded;
-        }
-        Debug.DrawRay(transform.position, back * (groundCheckRadius + 0.7f), Color.yellow);
-        Debug.DrawRay(transform.position, fwd * (groundCheckRadius + 0.3f), Color.yellow);
+
+        //isAlmostGrounded = Physics.Raycast(transform.position, -directionTransform.forward, groundCheckRadius + 0.7f, groundLayerMask) ||
+        //    Physics.Raycast(transform.position, directionTransform.forward, groundCheckRadius + 0.3f, groundLayerMask) ? true : isGrounded;
 
         if (isGrounded == isGroundedCurrentFrame)
             return;
+
+        if (isGroundedCurrentFrame)
+        {
+            isAlmostGrounded = false;
+        }
+        else
+        {
+            Vector3 horizontalOffset = horizontalClimbOffset * directionTransform.forward;
+            Vector3 verticalOffset = verticalClimbOffset * Vector3.up;
+            Vector3 frontCheckStart = transform.position + verticalOffset + horizontalOffset;
+            Vector3 frontCheckEnd = transform.position - verticalOffset + horizontalOffset;
+            Vector3 backCheckStart = transform.position + verticalOffset - horizontalOffset;
+            Vector3 backCheckEnd = transform.position - verticalOffset - horizontalOffset;
+
+            if (Physics.Linecast(frontCheckStart, frontCheckEnd, groundLayerMask))
+            {
+                isAlmostGrounded = true;
+                isFrontAlmostGrounded = true;
+            }
+            else if (Physics.Linecast(backCheckStart, backCheckEnd, groundLayerMask))
+            {
+                isAlmostGrounded = true;
+                isFrontAlmostGrounded = false;
+            }
+        }
 
         if (isGroundedCurrentFrame && !isGrounded)  
         {
@@ -260,6 +306,20 @@ public class PlayerMovement : PlayerModule
         speedMultiplayer -= changeSpeedMultiplayer;
     }
 
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+    //    {
+    //        ContactPoint contactPoint = collision.contacts[0];
+
+    //        //if (collisionPoint.y > transform.position.y + minContactOffset)
+    //            //isAlmostGrounded = true;
+            
+    //        isAlmostGrounded = true;
+    //        isFrontAlmostGrounded = directionTransform.forward.Angle(contactPoint.normal) > 90f;
+    //    }
+    //}
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
@@ -267,6 +327,21 @@ public class PlayerMovement : PlayerModule
 
         if (directionTransform != null)
         {
+            Vector3 horizontalOffset = horizontalClimbOffset * directionTransform.forward;
+            Vector3 verticalOffset = verticalClimbOffset * Vector3.up;
+            Vector3 frontCheckStart = transform.position + verticalOffset + horizontalOffset;
+            Vector3 frontCheckEnd = transform.position - verticalOffset + horizontalOffset;
+            Vector3 backCheckStart = transform.position + verticalOffset - horizontalOffset;
+            Vector3 backCheckEnd = transform.position - verticalOffset - horizontalOffset;
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(frontCheckStart, frontCheckEnd);
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(backCheckStart, backCheckEnd);
+
+            //    Gizmos.DrawRay(transform.position, (groundCheckRadius + 0.7f) * directionTransform.forward);
+            //    Gizmos.DrawRay(transform.position, (groundCheckRadius + 0.3f)  * -directionTransform.forward);
+
             Gizmos.color = Color.blue;
             Gizmos.DrawLine(directionTransform.position, directionTransform.position + directionTransform.forward);
         }

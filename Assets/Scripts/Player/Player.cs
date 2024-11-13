@@ -84,7 +84,7 @@ public class Player : MonoBehaviour,
 
     public static void AddStar()
     {
-        Instance.collectedStarCount++;
+        LevelsManager.Instance.SetStars(++Instance.collectedStarCount);
     }
 
     public static void RemoveStar()
@@ -126,10 +126,5 @@ public class Player : MonoBehaviour,
         AudioManager.Instance.PlaySound(dieAudio, Random.Range(0.9f, 1.1f));
         yield return new WaitForEndOfFrame();
         SceneController.ReloadScene();
-    }
-
-    private void OnDestroy()
-    {
-        LevelsManager.Instance.SetStars(collectedStarCount);
     }
 }
