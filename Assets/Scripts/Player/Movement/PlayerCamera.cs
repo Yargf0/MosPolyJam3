@@ -43,8 +43,9 @@ public class PlayerCamera : PlayerModule
         base.Init(input);
 
         input.OnRotate += Rotate;
+        rotation = transform.rotation.eulerAngles;
 
-       // Player.Instance.FOVMultiplier.ValueChanged += OnFOVMultiplierValueChanged;
+        // Player.Instance.FOVMultiplier.ValueChanged += OnFOVMultiplierValueChanged;
     }
 
     private void Start()
@@ -52,6 +53,7 @@ public class PlayerCamera : PlayerModule
         cam = GetComponent<Camera>();
         defaultFOV = cam.fieldOfView;
         currentFOV = cam.fieldOfView;
+        rotation = transform.rotation.eulerAngles;
 
         runSpeed = (Player.Instance.PlayerMovement.runSpeed / Player.Instance.PlayerMovement.onGroundDrag)-1;
         walkSpeed = Player.Instance.PlayerMovement.walkSpeed / Player.Instance.PlayerMovement.onGroundDrag;
@@ -94,12 +96,11 @@ public class PlayerCamera : PlayerModule
         float fov = Mathf.Lerp(walkFOV, runFOV, (speed - walkSpeed) / (runSpeed - walkSpeed));
         return fov;
     }
-    private void OnFOVMultiplierValueChanged(float newValue)
-    {
-        tween?.Kill();
-        tween = cam.DOFieldOfView(defaultFOV * newValue, fovTweenOptions.Duration).
-            SetEase(fovTweenOptions.Ease).
-            Play();
-    }
-
+    //private void OnFOVMultiplierValueChanged(float newValue)
+    //{
+    //    tween?.Kill();
+    //    tween = cam.DOFieldOfView(defaultFOV * newValue, fovTweenOptions.Duration).
+    //        SetEase(fovTweenOptions.Ease).
+    //        Play();
+    //}
 }

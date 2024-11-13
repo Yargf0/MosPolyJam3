@@ -53,6 +53,7 @@ public class PlayerMovement : PlayerModule
 
     private bool readyToJump = true;
     private bool isGrounded;
+    private bool isAlmostGrounded;
     private bool isOnSpring=false;
 
     public Rigidbody rb;
@@ -189,7 +190,7 @@ public class PlayerMovement : PlayerModule
 
     private void Jump()
     {
-        if (!readyToJump || !isGrounded)
+        if (!readyToJump || (!isGrounded && !isAlmostGrounded))
             return;
 
         rb.AddForce(jumpForce * transform.up, ForceMode.Impulse);
@@ -212,14 +213,30 @@ public class PlayerMovement : PlayerModule
     private void CalculateGrounded()
     {
         bool isGroundedCurrentFrame = Physics.CheckSphere(transform.position, groundCheckRadius, groundLayerMask);
+        Vector3 back = transform.TransformDirection(Vector3.back);
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        if (Physics.Raycast(transform.position, back, groundCheckRadius + 0.7f, groundLayerMask))
+        {            
+            isAlmostGrounded = true;
+        }
+        else if(Physics.Raycast(transform.position, fwd, groundCheckRadius + 0.3f, groundLayerMask))
+        {
+            isAlmostGrounded = true;
+        }
+        else 
+        {
+            isAlmostGrounded = isGrounded;
+        }
+        Debug.DrawRay(transform.position, back * (groundCheckRadius + 0.7f), Color.yellow);
+        Debug.DrawRay(transform.position, fwd * (groundCheckRadius + 0.3f), Color.yellow);
 
         if (isGrounded == isGroundedCurrentFrame)
             return;
 
-        if (isGroundedCurrentFrame && !isGrounded)
+        if (isGroundedCurrentFrame && !isGrounded)  
         {
             isOnSpring = false;
-            rb.drag = onGroundDrag;
+            rb.drag = onGroundDrag;           
             rb.useGravity = false;
         }
         else if (!isGroundedCurrentFrame && isGrounded)
