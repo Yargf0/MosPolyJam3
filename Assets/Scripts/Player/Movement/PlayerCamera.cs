@@ -42,9 +42,9 @@ public class PlayerCamera : PlayerModule
     {
         base.Init(input);
 
+        rotation = transform.rotation.eulerAngles;
         input.OnRotate += Rotate;
         rotation = transform.rotation.eulerAngles;
-
         // Player.Instance.FOVMultiplier.ValueChanged += OnFOVMultiplierValueChanged;
     }
 
