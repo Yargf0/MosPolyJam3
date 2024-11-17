@@ -92,7 +92,7 @@ public class PlayerMovement : PlayerModule
         footstepTimer = new CountdownTimer();
         footstepTimer.OnFinished(delegate
         {
-            if (isGrounded && rb.velocity != Vector3.zero)
+            if (isGrounded && rb.linearVelocity != Vector3.zero)
                 AudioManager.Instance.PlaySound(footstepAudio, Random.Range(0.9f, 1.1f));
         });
     }
@@ -211,7 +211,7 @@ public class PlayerMovement : PlayerModule
         {
             if (isFrontAlmostGrounded)
             {
-                if (directionTransform.forward.Angle(rb.velocity) < 90f)
+                if (directionTransform.forward.Angle(rb.linearVelocity) < 90f)
                 {
                     force *= frontClimbJumpForceMultiplyer;
                     force += directionTransform.forward;
@@ -282,12 +282,12 @@ public class PlayerMovement : PlayerModule
         if (isGroundedCurrentFrame && !isGrounded)  
         {
             isOnSpring = false;
-            rb.drag = onGroundDrag;           
+            rb.linearDamping = onGroundDrag;           
             rb.useGravity = false;
         }
         else if (!isGroundedCurrentFrame && isGrounded)
         {
-            rb.drag = inAirDrag;
+            rb.linearDamping = inAirDrag;
             rb.useGravity = true;
         }
 

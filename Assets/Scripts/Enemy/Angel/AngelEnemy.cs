@@ -34,10 +34,10 @@ public class AngelEnemy : BaseEnemy2D
     {
         if (other.CompareTag("Player"))
         {
-            Vector3 playerVelocity = other.attachedRigidbody.velocity;
+            Vector3 playerVelocity = other.attachedRigidbody.linearVelocity;
             playerVelocity.x = playerVelocity.z = 0f;
 
-            other.attachedRigidbody.velocity = playerVelocity;
+            other.attachedRigidbody.linearVelocity = playerVelocity;
         }
     }
 

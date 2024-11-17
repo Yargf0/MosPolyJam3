@@ -25,8 +25,8 @@ public class Arrow : MonoBehaviour
 
     private void Update()
     {
-        if (rb.velocity != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(rb.velocity);
+        if (rb.linearVelocity != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(rb.linearVelocity);
     }
 
     private void OnCollisionEnter(Collision collision)
