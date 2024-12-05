@@ -28,14 +28,14 @@ public class PlayerCamera : PlayerModule
     public Transform DirectionXZTransform => orientationTransform;
 
 
-    public Rigidbody rb;              // Ссылка на Rigidbody игрока
+    public Rigidbody rb;              // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Rigidbody пїЅпїЅпїЅпїЅпїЅпїЅ
 
-    public float minFOV = 50f;        // Минимальное значение FOV
-    public float maxFOV = 135f;       // Максимальное значение FOV
-    public float walkSpeed = 5.71f;   // Скорость при ходьбе
-    public float runSpeed = 9f;      // Скорость при беге
-    public float walkFOV = 60f;       // FOV при ходьбе
-    public float runFOV = 90f;        // FOV при беге
+    public float minFOV = 50f;        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ FOV
+    public float maxFOV = 135f;       // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ FOV
+    public float walkSpeed = 5.71f;   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    public float runSpeed = 9f;      // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    public float walkFOV = 60f;       // FOV пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    public float runFOV = 90f;        // FOV пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     public float transitionSpeed = 5f;
 
     public override void Init(PlayerInput input)
@@ -63,7 +63,7 @@ public class PlayerCamera : PlayerModule
     private void Update()
     {
         Move();
-        float  horizontalSpeed = new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude;
+        float  horizontalSpeed = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).magnitude;
 
         float targetFOV = CalculateFOV(horizontalSpeed);
         targetFOV = targetFOV*Player.Instance.PlayerMovement.speedMultiplayer;
@@ -89,10 +89,10 @@ public class PlayerCamera : PlayerModule
     }
 
 
-    // Функция для вычисления FOV на основе скорости
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ FOV пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     float CalculateFOV(float speed)
     {
-        // Линейная интерполяция для получения FOV в зависимости от скорости
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ FOV пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         float fov = Mathf.Lerp(walkFOV, runFOV, (speed - walkSpeed) / (runSpeed - walkSpeed));
         return fov;
     }
