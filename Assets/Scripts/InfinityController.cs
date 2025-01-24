@@ -6,6 +6,7 @@ public class InfinityController : MonoBehaviour
     public GameObject Sun;
     public float SpawnDistance;
     public int LevelPlatformNumber;
+    private Vector3 playerCekpoint;
 
     [Header("NeonCity")]
     public List<GameObject> NeonCityPlatforms;
@@ -50,8 +51,8 @@ public class InfinityController : MonoBehaviour
         {
             instance = this;
         }
-        ChangeLevelToNeonCity();
-        infinitySpawn.SpawnNextPlatforms(NeonCityPlatforms, NeonCitySpawningBacgroundObjects, NeonCityBacgroundObjectDistance, Vector3.zero, SpawnDistance, LevelPlatformNumber);
+        ChangeLevelToSunshine();
+        infinitySpawn.SpawnNextPlatforms(SunshinePlatforms, SunshineSpawningBacgroundObjects, NeonCityBacgroundObjectDistance, Vector3.zero, SpawnDistance, LevelPlatformNumber);
     }
     public void ChangeLevelToDark()
     {
@@ -65,7 +66,13 @@ public class InfinityController : MonoBehaviour
     {
         changeBackground.ChangeLevel(Sun, NeonCitySunMaterial, NeonCitySkyMaterial, NeonCityBacgroundObjects, NeonCityGlobalVolume);
     }
-
+    public void Update()
+    {
+        if (playerCekpoint.x >= Player.Instance.gameObject.transform.position.x && playerCekpoint.y >= Player.Instance.gameObject.transform.position.y && playerCekpoint.z >= Player.Instance.gameObject.transform.position.z)
+        {
+            RandomLevel();
+        }
+    }
     public void RandomLevel()
     {
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Rendering.Universal;
 
 public class ChangeBackground : MonoBehaviour
 {
@@ -31,7 +32,8 @@ public class ChangeBackground : MonoBehaviour
         { 
             Destroy(turnedOnGlobalVolume);
         }
-        //turnedOnGlobalVolume = Instantiate(toChangeGlobalVolume);
-
+        turnedOnGlobalVolume = Instantiate(toChangeGlobalVolume);
+        var cameraData = Camera.main.GetUniversalAdditionalCameraData();
+        cameraData.renderPostProcessing = true;
     }
 }
